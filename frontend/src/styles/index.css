@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  font-color: black;
+}
+
+.home h1 {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-10%, -50%);
+}
+
+
+
+.nav a {
+  color: white;
+  font-family: serif;
+  font-size: 20px;
+  padding: 12px;
+  text-decoration: none;
+  
+}
+
+
