@@ -1,0 +1,12 @@
+postItem {
+  background : 'lightsteelblue';
+  textTransform : 'uppercase';
+  box-shadow: rgb(154, 152, 152) 2px 2px 4px 1px 
+}
+
+.postItem h1 {
+  color: #c7a0d0;
+  text-decoration: underline;
+  text-decoration-style: double;
+  font-style: 'oblique';
+}

@@ -1,55 +1,89 @@
 // commentsActions.js
 
-export const ADD_POST_COMMENT = 'ADD_POST_COMMENT';
-export const DELETE_POST_COMMENT = 'DELETE_POST_COMMENT';
-export const GET_POST_COMMENTS = 'GET_POST_COMMENTS';
-export const GET_POST_COMMENTS_WITH_ID = 'GET_POST_COMMENTS_WITH_ID';
-export const POST_COMMENT_VOTE = 'POST_COMMENT_VOTE';
-export const PUT_COMMENT_DETAILS = 'PUT_COMMENT_DETAILS';
+import { store } from '../store';
 
-export function addPostComment ({ post, comment }) {
-  return {
-    type: ADD_POST_COMMENT,
-    post: post,
+export const COMMENT_VOTE = 'COMMENT_VOTE';
+export const COMMENT_VOTE_FAILURE = 'COMMENT_VOTE_FAILURE';
+
+export const CREATED_COMMENT = 'CREATED_COMMENT';
+export const CREATED_COMMENT_FAILURE = 'CREATED_COMMENT_FAILURE';
+
+export const DELETED_COMMENT = 'DELETED_COMMENT';
+export const DELETED_COMMENT_FAILURE = 'DELETED_COMMENT_FAILURE';
+
+export const GET_COMMENTS = 'GET_COMMENTS';
+export const GET_COMMENTS_FAILURE = 'GET_COMMENTS_FAILURE';
+
+export const UPDATED_COMMENT = 'UPDATED_COMMENT';
+export const UPDATED_COMMENT_FAILURE = 'UPDATED_COMMENT_FAILURE';
+
+export function createdComment ({ comment }) {
+  return store.dispatch({
+    type: CREATED_COMMENT,
     comment: comment
-  }
+  });
 }
 
-export function deletePostComment ({ post }) {
-  return {
-    type: DELETE_POST_COMMENT,
+export function createdCommentFailure ({ errors }) {
+  return store.dispatch({
+    type: DELETED_COMMENT_FAILURE,
+    errors: errors
+  });
+}
+
+export function deletedComment ({ post }) {
+  return store.dispatch({
+    type: DELETED_COMMENT,
     post: post
-  }
+  });
 }
 
-export function getPostComments ({ post, comments }) {
-  return {
-    type: GET_POST_COMMENTS,
-    post: post,
+export function deletedCommentFailure ({ errors }) {
+  return store.dispatch({
+    type: DELETED_COMMENT_FAILURE,
+    errors: errors
+  });
+}
+
+export function postedCommentVote ({ comment }) {
+  return store.dispatch({
+    type: COMMENT_VOTE,
+    comment: comment
+  });
+}
+
+export function postedCommentVoteFailure ({ error }) {
+  return store.dispatch({
+    type: COMMENT_VOTE_FAILURE,
+    error: error
+  });
+}
+
+export function retrievedComments ({comments}) {
+  console.log('comments in action: ' + JSON.stringify(comments));
+  return store.dispatch({
+    type: GET_COMMENTS,
     comments: comments
-  }
+  });
 }
 
-export function getPostCommentsWithId ({ post, comments }) {
-  return {
-    type: GET_POST_COMMENTS_WITH_ID,
-    post: post,
-    comments: comments
-  }
+export function retrievedCommentsFailure ({ errors }) {
+  return store.dispatch({
+    type: GET_COMMENTS_FAILURE,
+    errors: errors
+  });
 }
 
-export function postCommentVote ({ comment, vote }) {
-  return {
-    type: POST_COMMENT_VOTE,
-    comment: comment,
-    vote: vote
-  }
+export function updatedComment ({ comment }) {
+  return store.dispatch({
+    type: UPDATED_COMMENT,
+    comment: comment
+  });
 }
 
-export function putCommentDetails ({ comment, details }) {
-  return {
-    type: PUT_COMMENT_DETAILS,
-    comment: comment,
-    details: details
-  }
+export function updatedCommentFailure ({ comment }) {
+  return store.dispatch({
+    type: UPDATED_COMMENT_FAILURE,
+    comment: comment
+  });
 }

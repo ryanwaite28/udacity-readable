@@ -1,8 +1,8 @@
 // manageCommentsPosts.js
 
 import React from 'react';
-import Post from './../components/post-components/post';
-import Navigation from './../components/navigation';
+import Post from './../components/post';
+import Navigation from './../components/shared-components/navigation';
 
 const posts = ['post1', 'post2', 'post3'];
 

@@ -1,54 +1,89 @@
 // postActions.js
 
-export const CREATE_NEW_POST = 'CREATE_NEW_POST';
-export const DELETE_POST = 'DELETE_POST';
-export const GET_ALL_POSTS = 'GET_ALL_POSTS';
-export const GET_POST_COMMENTS = 'GET_POST_COMMENTS';
-export const POST_VOTE_DETAILS = 'POST_VOTE_DETAILS';
-export const PUT_POST_DETAILS = 'PUT_POST_DETAILS';
+import { store } from '../store';
 
-export function createNewPost ({ post, category }) {
-  return {
-    type: CREATE_NEW_POST,
+export const CREATED_POST = 'CREATED_POST';
+export const CREATED_POST_FAILURE = 'CREATED_POST_FAILURE';
+
+export const DELETED_POST = 'DELETED_POST';
+export const DELETED_POST_FAILURE = 'DELETED_POST_FAILURE';
+
+export const GET_ALL_POSTS = 'GET_ALL_POSTS';
+export const GET_ALL_POSTS_FAILURE = 'GET_ALL_POSTS_FAILURE';
+
+export const POST_VOTE = 'POST_VOTE';
+export const POST_VOTE_FAILURE = 'POST_VOTE_FAILURE';
+
+export const UPDATED_POST = 'UPDATED_POST';
+export const UPDATED_POST_FAILURE = 'UPDATED_POST_FAILURE';
+
+export function createdPost (post, category) {
+  return store.dispatch({
+    type: CREATED_POST,
     post: post,
     category: category
-  }
+  });
 }
 
-export function deletePost ({ posts }) {
-  return {
-    type: DELETE_POST,
+export function createdPostFailure (error) {
+  return store.dispatch({
+    type: CREATED_POST_FAILURE,
+    error: error
+  });
+}
+
+export function deletedPost (posts) {
+  return store.dispatch({
+    type: DELETED_POST,
     posts: posts,
-  }
+  });
 }
 
-export function getAllPosts ({ posts }) {
-  return {
+export function deletedPostFailure (error) {
+  return store.dispatch({
+    type: DELETED_POST_FAILURE,
+    error: error,
+  });
+}
+
+export function receivedAllPosts (posts) {
+  return store.dispatch({
     type: GET_ALL_POSTS,
     posts: posts
-  }
+  });
 }
 
-export function getPostComments ({ post, comments }) {
-  return {
-    type: GET_POST_COMMENTS,
-    post: post,
-    comments: comments
-  }
+export function receivedAllPostsFailure (error) {
+  return store.dispatch({
+    type: GET_ALL_POSTS_FAILURE,
+    error: error
+  });
 }
 
-export function postVoteDetails ({ post, details }) {
-  return {
-    type: POST_VOTE_DETAILS,
-    post: post,
-    details: details
-  }
+export function postedVote (post) {
+  return store.dispatch({
+    type: POST_VOTE,
+    post: post
+  });
 }
 
-export function putPostDetails ({ post, category, details }) {
-  return {
-    type: PUT_POST_DETAILS,
-    post: post,
-    details: details
-  }
+export function postedVoteFailure (error) {
+  return store.dispatch({
+    type: POST_VOTE_FAILURE,
+    error: error
+  });
+}
+
+export function updatedPost (post, category, details) {
+  return store.dispatch({
+    type: UPDATED_POST,
+    post: post
+  });
+}
+
+export function updatedPostFailure(error) {
+  return store.dispatch({
+    type: UPDATED_POST_FAILURE,
+    error: error
+  });
 }
