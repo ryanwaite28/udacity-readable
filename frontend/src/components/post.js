@@ -32,7 +32,7 @@ class Post extends React.Component {
     
     return (
       <div>
-        { post && !post.deleted &&
+        { post &&
           <div className="uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small" 
                style={this.styles.post}>
             <div className="uk-header">

@@ -15,7 +15,12 @@ class Category extends React.Component {
   }
 
   render() {
-    const { posts } = this.props;
+    let { posts } = this.props;
+    if(posts) {
+      posts = this.props.posts.filter((post) => {
+        return post.deleted === false
+      })
+    }
     
     return (
       <div className='postItem'>

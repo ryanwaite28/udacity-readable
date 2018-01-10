@@ -12,16 +12,49 @@ import Navigation from './../components/shared-components/navigation';
 class Home extends React.Component {
   constructor(props) {
     super(props)
+    
+    this.state = {
+      sort: 'Comments'
+    }
     getPosts();
+  }
+  
+  filterPosts = (posts) => {
+    if(posts) {
+      posts = this.props.posts.filter((post) => {
+        return post.deleted === false
+      })
+    }
+    return posts;
+  }
+
+  setSortType = (event) => {
+    if(event && event.target && event.target.value) {
+      this.setState({ sort : event.target.value });
+    }
+  }
+
+  sortPosts = (posts) => {
+    const sortType = this.state.sort;
+    if(sortType && posts) {
+       if('Votes'===sortType) { 
+        posts = [].concat(posts).sort((a, b) => { return a.voteScore - b.voteScore });
+      } else if('Comments'===sortType) {
+        console.log('comments');
+      }
+    }
+    return posts;
   }
 
   render() {
-    const { posts } = this.props;
+    let { posts } = this.props;
+    posts  = this.filterPosts(posts);
+    posts = this.sortPosts(posts);
     
     return (
       <div className='postItem'>
         <Navigation />
-        <SortBar components={posts}/>
+        <SortBar components={posts} setSortType={this.setSortType}/>
         <h1>All Categories</h1>
         { posts && posts.map((post, key) => {
             return (<div key={key}><Post fetchedPost={post}/></div>);

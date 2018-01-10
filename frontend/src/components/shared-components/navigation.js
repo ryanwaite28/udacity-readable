@@ -3,6 +3,8 @@
 import React from 'react';
 import CreateEditModal from './createEditModal';
 import { createPost } from './../../api/postsApi';
+import { connect } from 'react-redux';
+import { getCategories } from './../../api/categoriesApi';
 import Icons from 'uikit/dist/js/uikit-icons';
 import SubNavigation from './subNavigation';
 import UIkit from 'uikit';
@@ -11,17 +13,23 @@ import 'uikit/dist/css/uikit.min.css';
 UIkit.use(Icons);
 
 class Navigation extends React.Component {
-  
-  styles = {
-    header: {
-      color: '#457baf'
-    },
-    navbar: {
-      boxShadow: 'rgb(167, 167, 167) 2px 2px 4px 1px'
+  constructor(props) {
+    super(props);
+    getCategories();
+    
+    this.styles = {
+      header: {
+        color: '#457baf'
+      },
+      navbar: {
+        boxShadow: 'rgb(167, 167, 167) 2px 2px 4px 1px'
+      }
     }
   }
 
   render() {
+    const { categories } = this.props;
+    
     return (
       <div>
         <nav className="uk-navbar-container uk-margin uk-padding-small" 
@@ -30,7 +38,7 @@ class Navigation extends React.Component {
           <div className="uk-navbar-item">
             <button data-uk-toggle="target: #sub-nav" data-uk-icon="icon: table">
             </button>
-            <SubNavigation />
+            <SubNavigation categories={categories}/>
           </div>
       
           <div className="uk-navbar-center">
@@ -41,7 +49,7 @@ class Navigation extends React.Component {
             <div className="uk-padding-small">
               <button data-uk-toggle="target: #modal_" data-uk-icon="icon: plus">
               </button>
-              <CreateEditModal post='' createComponent={createPost}/>
+              <CreateEditModal categories={categories} component='' createComponent={createPost}/>
             </div>
             <div className="uk-padding-small">
               <a href="/manageCommentsPosts" style={{ color : '#666' }}>
@@ -55,4 +63,8 @@ class Navigation extends React.Component {
   }
 }
 
-export default Navigation;
+function mapStateToProps ({ categoriesReducer }) {
+  return { categories : categoriesReducer['categories'] };
+}
+
+export default connect(mapStateToProps)(Navigation);

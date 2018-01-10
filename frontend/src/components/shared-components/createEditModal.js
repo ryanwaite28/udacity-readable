@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const CreateEditModal = ({ component, createComponent, editComponent }) => {
+const CreateEditModal = ({ categories, component, createComponent, editComponent }) => {
   
   this.styles = {
     sectionTitle: {
@@ -27,15 +27,16 @@ const CreateEditModal = ({ component, createComponent, editComponent }) => {
   }
   
   this.handleOnSubmit = () => {
+    const id = this.getId();
+    const author = document.getElementById("authorInput_" + id).value;
+    const body = document.getElementById("bodyInput_" + id).value;
+    const title = document.getElementById("titleInput_" + id).value;
+    
     if(component) {
-      const title = document.getElementById('titleInput').value;
-      const body = document.getElementById('bodyInput').value;
-      console.log('title: '+ title);
-      console.log('body: '+ body);
-      console.log('id: '+ this.getId());
       editComponent(body, this.getId(), title);
     } else {
-      createComponent();
+      const category = document.getElementById("categoriesInput_" + id).value;
+      createComponent(author, body, category, title);
     }
   }
   
@@ -46,28 +47,40 @@ const CreateEditModal = ({ component, createComponent, editComponent }) => {
                 data-uk-close type="button">
         </button>
         <h2 className="uk-modal-title">{this.getHeader()}</h2>
-        <form>
+        <form id="form">
           <div className="uk-margin">
             <span style={this.styles.sectionTitle}>Author</span>  
             <input className="uk-input" 
-                   defaultValue={this.getDefaultValue('author')}
-                   id="authorInput" 
+                   value={this.getDefaultValue('author')}
+                   id={"authorInput_" + this.getId()}
                    placeholder="Enter your name here."
                    type="text"/>
           </div>
           <div className="uk-margin">
             <span style={this.styles.sectionTitle}>Title</span>  
             <input className="uk-input" 
-                   defaultValue={this.getDefaultValue('title')}
-                   id="titleInput"
+                   value={this.getDefaultValue('title')}
+                   id={"titleInput_" +this.getId()}
                    placeholder="Enter a title here."
                    type="text"/>
           </div>
+          { categories && <div className="uk-margin">
+            <span style={this.styles.sectionTitle}>Categories</span>  
+            <select className="uk-select" 
+                    id={"categoriesInput_" + this.getId()}
+            >
+              { JSON.parse(categories).categories.map((category, key) => { 
+                  console.log(category.name);
+                  return ( <option key={key}>{category.name}</option> );
+              })}
+            </select>
+          </div> 
+          }
           <div className="uk-margin">
             <span style={this.styles.sectionTitle}>Content</span>
             <textarea className="uk-textarea" 
-                      defaultValue={this.getDefaultValue('body')}
-                      id="bodyInput"
+                      value={this.getDefaultValue('body')}
+                      id={"bodyInput_" + this.getId()}
                       rows="5"
                       placeholder="Enter the body here."
                       type="text" />
