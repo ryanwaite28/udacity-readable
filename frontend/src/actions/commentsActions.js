@@ -31,10 +31,10 @@ export function createdCommentFailure ({ errors }) {
   });
 }
 
-export function deletedComment ({ post }) {
+export function deletedComment ({ component }) {
   return store.dispatch({
     type: DELETED_COMMENT,
-    post: post
+    component: component
   });
 }
 

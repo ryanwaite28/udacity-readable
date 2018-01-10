@@ -22,7 +22,7 @@ const DropDownModify = ({ component, deleteComponent, editComponent, vote }) => 
              <span className="text">Edit</span>
           </li>
           <li>
-            <Delete id={component.id} deleteComponent={deleteComponent}/>
+            <Delete component={component} deleteComponent={deleteComponent}/>
             <span className="text">Delete</span> 
           </li>
         </ul>

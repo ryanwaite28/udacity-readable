@@ -39,14 +39,12 @@ export const createPost = (author, body, category, title) => {
        .catch((errors) =>  createdPostFailure(errors) ));
 }
 
-export const deletePost = (id) => {
-  console.log(id);
-  fetch(`${baseUrl}/posts/${id}`, { credentials: 'include', 
+export const deletePost = (component) => {
+  fetch(`${baseUrl}/posts/${component.id}`, { credentials: 'include', 
                                     headers, 
                                     method: 'DELETE' 
                                   } 
-       ).then((response) => { return (response.text())})
-       .then((data) => deletedPost(data))
+       ).then((response) => { return deletedPost(component)})
        .catch((errors) =>  deletedPostFailure(errors) )
 }
 

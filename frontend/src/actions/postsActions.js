@@ -32,10 +32,10 @@ export function createdPostFailure (error) {
   });
 }
 
-export function deletedPost (posts) {
+export function deletedPost (post) {
   return store.dispatch({
     type: DELETED_POST,
-    posts: posts,
+    post: post,
   });
 }
 

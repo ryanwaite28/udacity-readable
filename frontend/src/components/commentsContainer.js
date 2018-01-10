@@ -40,6 +40,7 @@ class CommentsContainer extends React.Component {
           </h1>
           <hr/>
           { this.state.comments.map((comment, key) => {
+              !comment.isDeleted &&
               return <Comment key={key} comment={comment}/>
             })
           }
