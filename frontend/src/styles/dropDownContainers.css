@@ -1,0 +1,14 @@
+.navIcon {
+  color: black;
+  cursor: pointer;
+}
+
+.list {
+  text-align: left;
+}
+     
+.text {
+  color: rgb(128, 141, 230);
+  padding-left: 5;
+  text-transform: uppercase;
+}

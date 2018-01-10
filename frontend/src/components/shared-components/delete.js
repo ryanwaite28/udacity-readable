@@ -3,11 +3,13 @@
 import React from 'react';
 
 const Delete = ({ deleteComponent, id }) => {
- 
+   
   return (
     <span>
-      <span data-uk-icon="icon: trash" 
-            onClick={() => deleteComponent(id)}></span>
+      <button data-uk-icon="icon: trash" 
+              data-uk-toggle={"target: #modifyDropDown_" + id}
+              onClick={() => deleteComponent(id)}>
+      </button>
     </span>
   );
 }

@@ -22,7 +22,7 @@ class Category extends React.Component {
         <Navigation />
         <h1>{this.category}</h1>
         { posts && posts.map((post, key) => {
-            return ( <div key={key}><Post post={post}/></div> )
+            return ( <div key={key}><Post fetchedPost={post}/></div> )
           })
         }
         { (!posts || posts.length < 1) &&

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { createComment } from './../api/commentsApi';
 import { deletePost, editPost, vote } from './../api/postsApi';
 import DropDownInfo from './shared-components/dropDownInfo';
 import DropDownModify from './shared-components/dropDownModify';
@@ -20,7 +19,7 @@ class Post extends React.Component {
         color: 'dimgray'
       }
     }
-    this.postFetched = props.postFetched;
+    this.fetchedPost = props.fetchedPost;
   }
   
   render() {
@@ -28,7 +27,7 @@ class Post extends React.Component {
     if(typeof post === 'string') {
       post = JSON.parse(post);
     } else if(!post) {
-      post = this.postFetched;
+      post = this.fetchedPost;
     }
     
     return (
@@ -46,7 +45,10 @@ class Post extends React.Component {
             </div>
             <ul className="uk-subnav uk-subnav-divider uk-flex-center">
               <li><DropDownInfo component={post}/></li>
-              <li><DropDownModify component={post}/></li>
+              <li><DropDownModify component={post} 
+                                  deleteComponent={deletePost} 
+                                  editComponent={editPost}
+                                  vote={vote}/></li>
               <li>
                 <a className='uk-text-meta' 
                    href={`category?${post.category}/post_id&${post.id}`} 

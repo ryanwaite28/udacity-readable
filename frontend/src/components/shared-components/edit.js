@@ -2,6 +2,7 @@
 
 import React from 'react';
 import CreateEditModal from './createEditModal';
+import UIkit from 'uikit';
 
 const Edit = ({ component, editComponent }) => {
 
@@ -11,12 +12,17 @@ const Edit = ({ component, editComponent }) => {
     return id;
   }
   
+  this.handleShowModal = () => {
+    UIkit.modal("#modal_" + this.getId()).toggle();
+  }
+  
   return (
     <span>
-      <span data-uk-toggle={"target: #modal_" + this.getId()}
-             data-uk-icon="icon: pencil"
-             type="button">
-      </span>
+      <button data-uk-toggle={"target: #modifyDropDown_" + this.getId()}
+              data-uk-icon="icon: pencil"
+              onClick={() => this.handleShowModal()}
+              type="button">
+      </button>
     <CreateEditModal component={component}  editComponent={editComponent}/>
   </span>
   );

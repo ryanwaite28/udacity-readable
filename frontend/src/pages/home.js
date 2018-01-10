@@ -24,7 +24,7 @@ class Home extends React.Component {
         <SortBar components={posts}/>
         <h1>All Categories</h1>
         { posts && posts.map((post, key) => {
-            return (<div key={key}><Post postFetched={post}/></div>);
+            return (<div key={key}><Post fetchedPost={post}/></div>);
           })
         }
         { (!posts || posts.length < 1) &&
