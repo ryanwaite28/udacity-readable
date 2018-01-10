@@ -65,10 +65,10 @@ export const editComment = (body, id, title) => {
 
 export const getComments = (id) => {
   const url = baseUrl + '/posts/' + id + '/comments';
-  fetch(url, { credentials, headers } 
-       ).then((response) => response.json()
+  fetch(url, { credentials: 'include', headers } 
+       ).then((response) => { return response.text()})
        .then((json) => retrievedComments(json) )
-       .catch((errors) => retrievedCommentsFailure(errors) ));
+       .catch((errors) => retrievedCommentsFailure(errors) );
 }
 
 export const vote = (id, vote) => {

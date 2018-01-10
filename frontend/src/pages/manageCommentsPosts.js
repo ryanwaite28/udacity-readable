@@ -2,7 +2,8 @@
 
 import React from 'react';
 import Post from './../components/post';
-import Navigation from './../components/shared-components/navigation';
+import Navigation from './../components/nav-components/navigation';
+import './pages.css';
 
 const posts = ['post1', 'post2', 'post3'];
 

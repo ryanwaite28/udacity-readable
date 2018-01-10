@@ -1,8 +1,8 @@
 // details.js
 
 import React from 'react';
-import Navigation from './../components/shared-components/navigation';
-import SortBar from './../components/shared-components/sortBar';
+import Navigation from './../components/nav-components/navigation';
+import './pages.css';
 
 class Details extends React.Component {
   constructor(props) {
@@ -15,7 +15,6 @@ class Details extends React.Component {
     return (
       <div>
         <Navigation/>
-        <SortBar/>
       </div>
     );
   }

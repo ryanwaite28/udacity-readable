@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { getComments } from './../api/commentsApi';
 import { deletePost, editPost, vote } from './../api/postsApi';
 import DropDownInfo from './shared-components/dropDownInfo';
 import DropDownModify from './shared-components/dropDownModify';
@@ -19,6 +20,7 @@ class Post extends React.Component {
         color: 'dimgray'
       }
     }
+    getComments(props.fetchedPost.id);
     this.fetchedPost = props.fetchedPost;
   }
   

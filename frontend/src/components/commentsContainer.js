@@ -55,4 +55,10 @@ class CommentsContainer extends React.Component {
   }
 }
 
+function mapStateToProps({ postsReducer }) {
+  return {
+    posts: state.postsReducer['posts']
+  };
+}
+
 export default CommentsContainer;
