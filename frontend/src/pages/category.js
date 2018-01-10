@@ -11,7 +11,7 @@ import Navigation from './../components/shared-components/navigation';
 class Category extends React.Component {
   constructor(props) {
     super(props);
-    getPostsCategory(window.location.search.replace('?', ''));
+    getPostsCategory(window.location.search.substring(1));
   }
 
   render() {

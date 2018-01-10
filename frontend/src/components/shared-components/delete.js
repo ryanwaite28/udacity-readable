@@ -5,9 +5,10 @@ import React from 'react';
 const Delete = ({ deleteComponent, id }) => {
  
   return (
-    <div>
-      <button data-uk-icon="icon: trash" onClick={() => deleteComponent(id)}></button>
-    </div>
+    <span>
+      <span data-uk-icon="icon: trash" 
+            onClick={() => deleteComponent(id)}></span>
+    </span>
   );
 }
 

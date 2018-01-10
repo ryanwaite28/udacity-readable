@@ -12,15 +12,13 @@ const Edit = ({ component, editComponent }) => {
   }
   
   return (
-    <div>
-      <div>
-        <button data-uk-toggle={"target: #modal_" + this.getId()}
-                data-uk-icon="icon: pencil"
-                type="button">
-        </button>
-        <CreateEditModal component={component}  editComponent={editComponent}/>
-      </div>
-    </div>
+    <span>
+      <span data-uk-toggle={"target: #modal_" + this.getId()}
+             data-uk-icon="icon: pencil"
+             type="button">
+      </span>
+    <CreateEditModal component={component}  editComponent={editComponent}/>
+  </span>
   );
 }
 

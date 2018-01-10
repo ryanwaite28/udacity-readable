@@ -14,10 +14,10 @@ class Navigation extends React.Component {
   
   styles = {
     header: {
-      color: 'dodgerblue'
+      color: '#457baf'
     },
     navbar: {
-      boxShadow: '#4c7094 2px 2px 4px 1px'
+      boxShadow: 'rgb(167, 167, 167) 2px 2px 4px 1px'
     }
   }
 

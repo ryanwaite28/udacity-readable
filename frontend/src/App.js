@@ -13,8 +13,8 @@ const App = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path='/' component={Home}/>
-          <Route path = '/post' component={Details}/>
-          <Route path='/category' component={Category}/>
+          <Route path = '/:category/:post_id' component={Details}/>
+          <Route path='/:category' component={Category}/>
           <Route exact path='/manageCommentsPosts' component={ManageCommentsPosts}/>
         </Switch>
       </BrowserRouter>

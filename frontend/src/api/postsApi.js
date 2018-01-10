@@ -1,3 +1,5 @@
+// postsApi.js
+
 import { 
   createdPost,
   createdPostFailure,
@@ -38,8 +40,13 @@ export const createPost = (author, body, category, title) => {
 }
 
 export const deletePost = (id) => {
-  fetch(`${baseUrl}/posts/${id}`, { credentials: 'include', headers, method: 'DELETE' } 
-       ).then((response) => console.log(response))
+  console.log(id);
+  fetch(`${baseUrl}/posts/${id}`, { credentials: 'include', 
+                                    headers, 
+                                    method: 'DELETE' 
+                                  } 
+       ).then((response) => { return (response.text())})
+       .then((data) => deletedPost(data))
        .catch((errors) =>  deletedPostFailure(errors) )
 }
 

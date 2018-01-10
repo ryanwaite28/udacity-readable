@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { getPosts } from './../api/postsApi';
 import './pages.css';
 import Post from './../components/post';
+import SortBar from './../components/shared-components/sortBar';
 import Navigation from './../components/shared-components/navigation';
 
 class Home extends React.Component {
@@ -20,9 +21,10 @@ class Home extends React.Component {
     return (
       <div className='postItem'>
         <Navigation />
+        <SortBar components={posts}/>
         <h1>All Categories</h1>
         { posts && posts.map((post, key) => {
-            return (<div key={key}><Post post={post}/></div>);
+            return (<div key={key}><Post postFetched={post}/></div>);
           })
         }
         { (!posts || posts.length < 1) &&

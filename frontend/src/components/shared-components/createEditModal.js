@@ -28,9 +28,12 @@ const CreateEditModal = ({ component, createComponent, editComponent }) => {
   
   this.handleOnSubmit = () => {
     if(component) {
-      const title = document.getElementById('bodyInput');
-      const body = document.getElementById('titleInput');
-      editComponent(this.getId(), body, title);
+      const title = document.getElementById('titleInput').value;
+      const body = document.getElementById('bodyInput').value;
+      console.log('title: '+ title);
+      console.log('body: '+ body);
+      console.log('id: '+ this.getId());
+      editComponent(body, this.getId(), title);
     } else {
       createComponent();
     }
@@ -70,10 +73,11 @@ const CreateEditModal = ({ component, createComponent, editComponent }) => {
                       type="text" />
           </div>
           <div className="uk-margin uk-footer uk-align-right">
-            <button className="uk-button uk-button-default uk-modal-close"                                       type="button">
+            <button className="uk-button uk-button-default uk-modal-close" 
+                    type="button">
               Cancel
             </button>
-            <button className="uk-button uk-button-default" 
+            <button className="uk-button uk-button-default uk-modal-close" 
                     onClick={() => this.handleOnSubmit()}
                     type="button">
               Submit

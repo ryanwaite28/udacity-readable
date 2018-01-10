@@ -2,14 +2,10 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-
-import CommentsContainer from './commentsContainer';
-import CreateEditModal from './shared-components/createEditModal';
 import { createComment } from './../api/commentsApi';
-import Delete from './shared-components/delete';
 import { deletePost, editPost, vote } from './../api/postsApi';
-import Edit from './shared-components/edit';
-import VoteScore from './shared-components/voteScore';
+import DropDownInfo from './shared-components/dropDownInfo';
+import DropDownModify from './shared-components/dropDownModify';
 
 class Post extends React.Component {
   constructor(props) {
@@ -22,56 +18,44 @@ class Post extends React.Component {
       },
       postTitle: {
         color: 'dimgray'
-      },
-      text: {
-        color: 'rgb(128, 141, 230)',
-        paddingLeft: 5, 
-        textTransform: 'uppercase'
       }
     }
+    this.postFetched = props.postFetched;
   }
   
   render() {
-    let { post, postUpdated } = this.props;
-    if(postUpdated && postUpdated.id === post.id) post = postUpdated;
-   
+    let { post } = this.props;
+    if(typeof post === 'string') {
+      post = JSON.parse(post);
+    } else if(!post) {
+      post = this.postFetched;
+    }
+    
     return (
-    <div className="uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small" 
-         style={this.styles.post}>
-        <div className="uk-header">
-          <h3 className="uk-card-title" style={this.styles.postTitle}>
-            {post.title}
-          </h3>
-        </div>
-        <div className="uk-content"><p>{post.body}</p></div>
-        <ul className="uk-subnav uk-subnav-divider uk-flex-center">
-          <li>
-             <span className="uk-text-meta" data-uk-icon="icon: user"/>
-             <span style={this.styles.text}>{post.author}</span>
-          </li>
-          <li>
-            <span className="uk-text-meta" data-uk-icon="icon: calendar"/>
-            <span style={this.styles.text}>{new Date(post.timestamp).toUTCString()}</span>
-          </li>
-          <li>
-            <VoteScore id={this.props.post.id} vote={vote}/>
-            <span className="uk-text-meta">
-              <span className="uk-badge">{post.voteScore} votes</span>
-            </span>
-          </li>
-          <li>
-            <button data-uk-toggle={"target: #modal_" + post.id}
-                    data-uk-icon="icon: commenting">
-            </button>
-            <CreateEditModal handleCreate={createComment}/>
-            <CommentsContainer id={post.id} title={post.title}/>
-          </li>
-          <li>
-            <Edit component={post} editComponent={editPost}/>
-            <span style={{ paddingRight : 10 }}></span>
-            <Delete id={post.id} deleteComponent={deletePost}/>
-          </li>
-        </ul>
+      <div>
+        { post &&
+          <div className="uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small" 
+               style={this.styles.post}>
+            <div className="uk-header">
+              <h3 className="uk-card-title" style={this.styles.postTitle}>
+                {post.title}
+              </h3>
+            </div>
+            <div className="uk-content">
+              <p>{post.body}</p>
+            </div>
+            <ul className="uk-subnav uk-subnav-divider uk-flex-center">
+              <li><DropDownInfo component={post}/></li>
+              <li><DropDownModify component={post}/></li>
+              <li>
+                <a className='uk-text-meta' 
+                   href={`category?${post.category}/post_id&${post.id}`} 
+                   data-uk-icon="icon: more">
+                </a>
+              </li>
+            </ul>
+          </div>
+        }
       </div>
     );
   }
@@ -79,7 +63,7 @@ class Post extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    postUpdated: state.postsReducer['post']
+    post: state.postsReducer['post']
   };
 }
 
