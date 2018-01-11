@@ -25,7 +25,7 @@ class Post extends React.Component {
   }
   
   render() {
-    let { post } = this.props;
+    let { post, } = this.props;
     if(typeof post === 'string') {
       post = JSON.parse(post);
     } else if(!post) {
@@ -53,7 +53,7 @@ class Post extends React.Component {
                                   vote={vote}/></li>
               <li>
                 <a className='uk-text-meta' 
-                   href={`category?${post.category}/post_id&${post.id}`} 
+                   href={`${post.category}/${post.id}`} 
                    data-uk-icon="icon: more">
                 </a>
               </li>
