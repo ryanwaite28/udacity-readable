@@ -1,23 +1,23 @@
 // details.js
 
 import React from 'react';
+import CommentsContainer from './../components/commentsContainer';
 import Navigation from './../components/nav-components/navigation';
+import PostContainer from './../components/postsContainer';
 import './pages.css';
 
-class Details extends React.Component {
-  constructor(props) {
-  super(props);
-  this.id = window.location.search.substring(1);
-}
-
-  render() {
-    console.log(this.id);
-    return (
-      <div>
-        <Navigation/>
-      </div>
-    );
-  }
+const Details = () => {
+  
+  const URL = window.location.href; 
+  const ID = URL.substring(URL.lastIndexOf('/') + 1);
+  
+  return (
+    <div>
+      <Navigation/>
+      <PostContainer id={ID}/>
+      <CommentsContainer id={ID}/>
+    </div>
+  );
 }
 
 export default Details;

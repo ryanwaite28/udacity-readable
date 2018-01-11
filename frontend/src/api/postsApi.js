@@ -59,6 +59,13 @@ export const editPost = (body, id, title) => {
          .catch((errors) =>  updatedPostFailure(errors) )
 }
 
+export const getPostId = (id) => {
+    fetch(`${baseUrl}/posts/${id}`, { credentials: 'include', headers } 
+         ).then((posts) => posts.json()
+        .then((json) => receivedAllPosts(json) ))
+        .catch((errors) => receivedAllPostsFailure(errors) )
+}
+
 export const getPosts = () => {
    fetch(`${baseUrl}/posts/`, { credentials: 'include', headers } 
          ).then((posts) => posts.json()

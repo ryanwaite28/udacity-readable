@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { getPosts, getPostsCategory } from './../api/postsApi';
+import { getPostId, getPosts, getPostsCategory } from './../api/postsApi';
 import Post from './post';
 import SortBar from './sortBar';
 
@@ -16,6 +16,8 @@ class PostContainer extends React.Component {
     
     if(props.category) {
       getPostsCategory(props.category);
+    } else if(props.id) {
+      getPostId(props.id);
     } else {
       getPosts();
     }
@@ -28,10 +30,12 @@ class PostContainer extends React.Component {
   }
 
   filterPosts = (posts) => {
-    if(posts) {
+    if(typeof posts === "array") {
       posts = this.props.posts.filter((post) => {
-        return post.deleted === false
+        return post.deleted === false;
       })
+    } else if(typeof posts === "object") {
+      if(posts.deleted === true) posts = [];
     }
     return posts;
   }
@@ -62,7 +66,7 @@ class PostContainer extends React.Component {
     return (
       <div>
         <div> 
-          { posts && <SortBar components={posts} setSortType={this.setSortType}/> } 
+          { posts && posts.length > 1 && <SortBar components={posts} setSortType={this.setSortType}/> } 
         </div>
         <div className='postItem'>
           <h1>{this.getHeader()}</h1>
