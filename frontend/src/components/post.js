@@ -46,11 +46,15 @@ class Post extends React.Component {
               <p>{post.body}</p>
             </div>
             <ul className="uk-subnav uk-subnav-divider uk-flex-center">
-              <li><DropDownInfo component={post}/></li>
-              <li><DropDownModify component={post} 
-                                  deleteComponent={deletePost} 
-                                  editComponent={editPost}
-                                  vote={vote}/></li>
+              <li>
+                <DropDownInfo component={post}/>
+              </li>
+              <li>
+                <DropDownModify component={post} 
+                                deleteComponent={deletePost} 
+                                editComponent={editPost}
+                                vote={vote}/>
+              </li>
               <li>
                 <a className='uk-text-meta' 
                    href={`${post.category}/${post.id}`} 

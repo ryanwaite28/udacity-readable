@@ -30,12 +30,14 @@ class PostContainer extends React.Component {
   }
 
   filterPosts = (posts) => {
-    if(typeof posts === "array") {
-      posts = this.props.posts.filter((post) => {
-        return post.deleted === false;
-      })
-    } else if(typeof posts === "object") {
-      if(posts.deleted === true) posts = [];
+    if(posts && posts === 'object') {
+      if(posts.constructor === Array) {
+        posts = this.props.posts.filter((post) => {
+          return post.deleted === false;
+        })
+      } else {
+        if(posts.deleted === true) posts = [];
+      }
     }
     return posts;
   }
@@ -59,7 +61,7 @@ class PostContainer extends React.Component {
   }
 
   render() {
-    let { posts, comments } = this.props;
+    let { id, comments, posts } = this.props;
     posts  = this.filterPosts(posts);
     posts = this.sortPosts(posts);
     
@@ -74,8 +76,9 @@ class PostContainer extends React.Component {
               return (<div key={key}><Post fetchedPost={post}/></div>);
             })
           }
-          { (!posts || posts.length < 1) &&
-             <div>No posts were found. Be the first to create a post!</div>
+          { (!posts || posts.length < 1) &&  (
+            ( id && <div>No posts with this id were found.</div> ) ||
+            ( !id && <div>No posts were found. Be the first to create a post!</div> ))
           }
         </div>
       </div>

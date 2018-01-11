@@ -1,6 +1,7 @@
 // commentsContainer.js
 
 import React from 'react';
+import { connect } from 'react-redux';
 import Comment from './comment';
 import { getComments } from './../api/commentsApi';
 
@@ -9,7 +10,6 @@ class CommentsContainer extends React.Component {
     super(props);
 
     this.state = {
-      comments: [],
       showComments: false
     }
     
@@ -24,19 +24,21 @@ class CommentsContainer extends React.Component {
  }
 
  render() {
+  const { comments } = this.props;
+   
   return (
    <div>
      <h1 className="uk-padding-small" style={this.styles.title}>
        Comments
      </h1>
      <hr/>
-       { this.state.comments.map((comment, key) => {
+       { comments && JSON.parse(comments).map((comment, key) => {
            if(!comment.isDeleted) {
              return ( <Comment key={key} comment={comment}/> );
            }
          })
        }
-       { (!this.state.comments || this.state.comments.length < 1) &&
+       { (!comments || JSON.parse(comments).length < 1) &&
          <div className="uk-padding-small">
            No comments were found for this post. Be the first to create a post!
          </div>
@@ -46,10 +48,10 @@ class CommentsContainer extends React.Component {
   }
 }
 
-function mapStateToProps({ postsReducer }) {
+function mapStateToProps({ commentsReducer }) {
   return {
-    posts: postsReducer['posts']
+    comments: commentsReducer['comments']
   };
 }
 
-export default CommentsContainer;
+export default connect(mapStateToProps)(CommentsContainer);
