@@ -1,13 +1,17 @@
 export function applyUpdate(updatedComponent, list) {
+  let isNewComponent = true;
   let updatedList = list;
   if(updatedComponent && list) {
     updatedList = [].concat(list).map((component) => {
       if(updatedComponent.id===component.id) { 
+        isNewComponent = false;
         return updatedComponent;
       } else {
         return component;
       }
     });
+    
+    if(isNewComponent) updatedList.push(updatedComponent);
   }
   return updatedList;
 }

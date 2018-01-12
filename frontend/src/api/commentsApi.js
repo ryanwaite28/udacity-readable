@@ -46,7 +46,7 @@ export const createComment = (author, body, id, title) => {
 export const deleteComment = (component) => {
   const url = baseUrl + '/comments/' + component.id;
   fetch(url, { credentials: 'include', headers, method: 'DELETE'} )
-       .then((component) => { return deletedComment(component)})
+       .then((response) => { return deletedComment(response.text())})
        .catch((errors) =>  deletedCommentFailure(errors) );
 }
 

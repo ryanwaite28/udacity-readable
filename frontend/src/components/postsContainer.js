@@ -52,14 +52,18 @@ class PostContainer extends React.Component {
 
   render() {
     let { post, posts } = this.props;
- 
+    let hasPosts = false;
+
     if(posts) {
       posts  = applyUpdate(post, posts);
       posts  = filterComponents(posts);
       posts = this.sortPosts(posts);
+      hasPosts = !isEmptyObject(posts);
+    } else if(post) {
+      post = applyUpdate(post, post);
+      post = filterComponents(posts);
+      hasPosts = true;
     }
-
-   const hasPosts = !isEmptyObject(posts);
 
     return (
       <div>
@@ -86,10 +90,10 @@ class PostContainer extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ postsReducer }) {
   return {
-    post: state.postsReducer['post'],
-    posts: state.postsReducer['posts']
+    post: postsReducer['post'],
+    posts: postsReducer['posts']
   };
 }
 

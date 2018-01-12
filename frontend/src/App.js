@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Category from './pages/category';
 import Details from './pages/details';
 import Home from './pages/home';
-import ManageCommentsPosts from './pages/manageCommentsPosts';
 import './styles/App.css';
 
 const App = () => {
@@ -15,7 +14,6 @@ const App = () => {
           <Route exact path='/' component={Home}/>
           <Route exact path = '/:category/:post_id' component={Details}/>
           <Route exact path='/:category' component={Category}/>
-          <Route exact path='/manageCommentsPosts' component={ManageCommentsPosts}/>
         </Switch>
       </BrowserRouter>
     </div>

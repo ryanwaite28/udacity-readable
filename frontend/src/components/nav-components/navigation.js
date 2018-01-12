@@ -51,11 +51,6 @@ class Navigation extends React.Component {
               </button>
               <CreateEditModal categories={categories} component='' createComponent={createPost}/>
             </div>
-            <div className="uk-padding-small">
-              <a href="/manageCommentsPosts" style={{ color : '#666' }}>
-                <span data-uk-icon="icon: user"></span>
-              </a>
-            </div>
           </div>
         </nav>
       </div>

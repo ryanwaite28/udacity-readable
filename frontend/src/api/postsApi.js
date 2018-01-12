@@ -22,7 +22,7 @@ const headers = {
 };
 
 export const createPost = (author, body, category, title) => {
-  fetch(`${baseUrl}/comments`, { body: JSON.stringify({
+  fetch(`${baseUrl}/posts`, { body: JSON.stringify({
                 author,
                 body,
                 category,
@@ -45,7 +45,7 @@ export const deletePost = (component) => {
                                     headers, 
                                     method: 'DELETE' 
                                   } 
-       ).then((response) => { return deletedPost(component)})
+       ).then((response) => { return deletedPost(response.text())})
        .catch((errors) =>  deletedPostFailure(errors) )
 }
 
