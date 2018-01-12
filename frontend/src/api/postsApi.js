@@ -90,4 +90,4 @@ export const vote = (id, vote) => {
          ).then((response) => response.json()
          .then((json) => postedVote(json) ))
          .catch((errors) =>  postedVoteFailure(errors) )
-  }
+}

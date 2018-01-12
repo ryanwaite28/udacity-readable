@@ -13,6 +13,8 @@ class PostContainer extends React.Component {
     this.state = {
       sort: 'Votes'
     }
+     
+    this.isDetailPage = props.isDetailPage;
     
     if(props.category) {
       getPostsCategory(props.category);
@@ -23,6 +25,20 @@ class PostContainer extends React.Component {
     }
   }
   
+  applyUpdate = (post, posts) => {
+    console.log('posts', posts);
+    if(post && posts) {
+      posts = [].concat(posts).map((postInMap) => {
+        if(post.id===postInMap.id) { 
+          return post;
+        } else {
+          return postInMap;
+        }
+      });
+    }
+    return posts;
+  }
+
   getHeader = () => {
     let header = 'All Categories';
     if(this.props.category) header = this.props.category;
@@ -61,10 +77,11 @@ class PostContainer extends React.Component {
   }
 
   render() {
-    let { id, comments, posts } = this.props;
+    let { id, comments, post, posts } = this.props;
+    posts  = this.applyUpdate(post, posts);
     posts  = this.filterPosts(posts);
     posts = this.sortPosts(posts);
-    
+
     return (
       <div>
         <div> 
@@ -73,7 +90,7 @@ class PostContainer extends React.Component {
         <div className='postItem'>
           <h1>{this.getHeader()}</h1>
           { posts && posts.map((post, key) => {
-              return (<div key={key}><Post fetchedPost={post}/></div>);
+              return (<div key={key}><Post isDetailPage={this.isDetailPage} fetchedPost={post}/></div>);
             })
           }
           { (!posts || posts.length < 1) &&  (
@@ -89,6 +106,7 @@ class PostContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     comments: state.commentsReducer['comments'],
+    post: state.postsReducer['post'],
     posts: state.postsReducer['posts']
   };
 }

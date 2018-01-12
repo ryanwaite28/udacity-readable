@@ -72,9 +72,8 @@ export const getComments = (id) => {
 }
 
 export const vote = (id, vote) => {
-  const url = baseUrl + '/posts/' + id;
-  fetch(url, { body: JSON.stringify({ option: vote }),
-               credentials, 
+  fetch(`${baseUrl}/comments/${id}`, { body: JSON.stringify({ option: vote }),
+               credentials: 'include', 
                headers, 
                method: 'POST'
              } 

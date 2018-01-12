@@ -14,7 +14,7 @@ const Details = () => {
   return (
     <div>
       <Navigation/>
-      <PostContainer id={ID}/>
+      <PostContainer id={ID} isDetailPage={true}/>
       <CommentsContainer id={ID}/>
     </div>
   );

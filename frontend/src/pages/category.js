@@ -9,7 +9,7 @@ const Category = () => {
   return (
     <div>
       <Navigation />
-      <PostContainer category={window.location.search.substring(1)}/>
+      <PostContainer isDetailPage={false} category={window.location.search.substring(1)}/>
     </div>
   );
 }

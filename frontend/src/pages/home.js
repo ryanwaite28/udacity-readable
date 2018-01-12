@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div>
       <Navigation />
-      <PostContainer />
+      <PostContainer isDetailPage={false}/>
     </div>
   );
 }

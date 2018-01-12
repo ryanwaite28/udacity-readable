@@ -65,7 +65,7 @@ export default function postsReducer (state = {}, action) {
         isError: false
       }
     case POST_VOTE_FAILURE:
-      console.log(PREFIX + 'Posts did not receive vote.');
+      console.log(PREFIX + 'Post did not receive vote.');
       return {
         ...state,
         errors: action.errors,

@@ -1,6 +1,8 @@
 // commentsReducer.js
 
 import {
+  COMMENT_VOTE,
+  COMMENT_VOTE_FAILURE,
   CREATED_COMMENT, 
   CREATED_COMMENT_FAILURE,
   DELETED_COMMENT,
@@ -14,6 +16,20 @@ import {
 function CommentsReducer (state = [], action) {
   const PREFIX = 'Reducer status: ';
   switch (action.type) {
+      case COMMENT_VOTE:
+      console.log(PREFIX + 'Comment received vote.');
+      return {
+        ...state,
+        comment: action.comment,
+        isError: false
+      }
+    case COMMENT_VOTE_FAILURE:
+      console.log(PREFIX + 'Comment did not receive vote.');
+      return {
+        ...state,
+        errors: action.errors,
+        isError: true
+      }
     case CREATED_COMMENT:
       console.log(PREFIX + 'Comment was created.');
       return {
