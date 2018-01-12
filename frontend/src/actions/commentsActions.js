@@ -34,7 +34,7 @@ export function createdCommentFailure (errors) {
 export function deletedComment (component) {
   return store.dispatch({
     type: DELETED_COMMENT,
-    component: component
+    comments: component
   });
 }
 

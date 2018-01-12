@@ -43,12 +43,11 @@ export const createComment = (author, body, id, title) => {
        .catch((errors) =>  createdCommentFailure(errors) ));
 }
 
-export const deleteComment = (id) => {
-  const url = baseUrl + '/posts/' + id;
-  fetch(url, { credentials, headers, method: 'DELETE'} 
-       ).then((response) => response.json()
-       .then((json) => deletedComment(json) )
-       .catch((errors) =>  deletedCommentFailure(errors) ));
+export const deleteComment = (component) => {
+  const url = baseUrl + '/comments/' + component.id;
+  fetch(url, { credentials: 'include', headers, method: 'DELETE'} )
+       .then((component) => { return deletedComment(component)})
+       .catch((errors) =>  deletedCommentFailure(errors) );
 }
 
 export const editComment = (body, id, title) => {

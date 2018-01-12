@@ -17,7 +17,7 @@ const SortBar = ({ components, setSortType }) => {
       <h3 style={this.styles.header}>Sort By Number Of</h3>
         <select className="uk-select uk-form-small uk-form-width-small"
                 onChange={(event) => setSortType(event)}>
-          <option>Comments</option>
+          <option>Date</option>
           <option>Votes</option>
      </select> 
    </div>

@@ -1,7 +1,6 @@
 // Post.js
 
 import React from 'react';
-import { getComments } from './../api/commentsApi';
 import { deletePost, editPost, vote } from './../api/postsApi';
 import DropDownInfo from './shared-components/dropDownInfo';
 import DropDownModify from './shared-components/dropDownModify';

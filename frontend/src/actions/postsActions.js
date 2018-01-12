@@ -35,7 +35,7 @@ export function createdPostFailure (error) {
 export function deletedPost (post) {
   return store.dispatch({
     type: DELETED_POST,
-    post: post,
+    posts: post,
   });
 }
 

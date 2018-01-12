@@ -40,7 +40,8 @@ export const createPost = (author, body, category, title) => {
 }
 
 export const deletePost = (component) => {
-  fetch(`${baseUrl}/posts/${component.id}`, { credentials: 'include', 
+  fetch(`${baseUrl}/posts/${component.id}`, { 
+                                    credentials: 'include', 
                                     headers, 
                                     method: 'DELETE' 
                                   } 

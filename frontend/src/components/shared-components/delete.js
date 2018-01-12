@@ -2,13 +2,13 @@
 
 import React from 'react';
 
-const Delete = ({ deleteComponent, id }) => {
+const Delete = ({ component, deleteComponent }) => {
    
   return (
     <span>
       <button data-uk-icon="icon: trash" 
-              data-uk-toggle={"target: #modifyDropDown_" + id}
-              onClick={() => deleteComponent(id)}>
+              data-uk-toggle={"target: #modifyDropDown_" + component.id}
+              onClick={() => deleteComponent(component)}>
       </button>
     </span>
   );

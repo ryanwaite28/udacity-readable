@@ -1,18 +1,15 @@
 // commentsContainer.js
 
 import React from 'react';
-import { connect } from 'react-redux';
+import { applyUpdate, filterComponents, isEmptyObject } from './../utils/helperMethods';
 import Comment from './comment';
+import { connect } from 'react-redux';
 import { getComments } from './../api/commentsApi';
 
 class CommentsContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      showComments: false
-    }
-    
     this.styles = {
       title: {
         color: '#c7a0d0',
@@ -23,38 +20,16 @@ class CommentsContainer extends React.Component {
     getComments(props.id);
  }
 
-  applyUpdate = (comment, comments) => {
-    console.log('comments', comments);
-    if(comment && comments) {
-      comments = [].concat(comments).map((commentInMap) => {
-        if(comment.id===commentInMap.id) { 
-          return comment;
-        } else {
-          return commentInMap;
-        }
-      });
-    }
-    return comments;
-  }
-
-  filterComments = (comments) => {
-    if(comments && comments === 'object') {
-      if(comments.constructor === Array) {
-        comments = this.props.comments.filter((comment) => {
-          return comment.deleted === false;
-        })
-      } else {
-        if(comments.deleted === true) comments = [];
-      }
-    }
-    return comments;
-  }
-
  render() {
   let { comment, comments } = this.props;
-  if(comments) comments = JSON.parse(comments);
-  comments = this.applyUpdate(comment, comments);
-  comments = this.filterComments(comments);
+
+  if(comments) {
+    comments = JSON.parse(comments);
+    comments = applyUpdate(comment, comments);
+    comments = filterComponents(comments);
+  }
+   
+  const hasComments = !isEmptyObject(comments);
 
   return (
    <div>
@@ -62,11 +37,13 @@ class CommentsContainer extends React.Component {
        Comments
      </h1>
      <hr/>
-       { comments && comments.map((comment, key) => {
-           return ( <Comment comment={comment} key={key}/> );
+       { hasComments && comments.map((comment, key) => {
+           return (
+             <Comment comment={comment} key={key}/> 
+           );
          })
        }
-       { (!comments || comments.length < 1) &&
+       { !hasComments &&
          <div className="uk-padding-small">
            No comments were found for this post. Be the first to create add a comment!
          </div>
