@@ -34,6 +34,7 @@ export default function postsReducer (state = {}, action) {
       console.log(PREFIX + 'Post was deleted.');
       return {
         ...state,
+        post: post,
         isError: false
       }
     case DELETED_POST_FAILURE:

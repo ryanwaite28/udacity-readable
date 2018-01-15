@@ -33,8 +33,8 @@ export const createPost = (author, body, category, title) => {
                credentials: 'include', 
                headers, 
                method: 'POST'
-             } 
-       ).then((response) => response.json()
+             })
+       .then((response) => response.json()
        .then((json) => createdPost(json) )
        .catch((errors) =>  createdPostFailure(errors) ));
 }
@@ -44,9 +44,10 @@ export const deletePost = (component) => {
                                     credentials: 'include', 
                                     headers, 
                                     method: 'DELETE' 
-                                  } 
-       ).then((response) => { return deletedPost(response.text())})
-       .catch((errors) =>  deletedPostFailure(errors) )
+                                  })
+       .then((response) => response.text()
+       .then((data) => deletedPost(data) )
+       .catch((errors) =>  deletedPostFailure(errors) ));
 }
 
 export const editPost = (body, id, title) => {
@@ -54,30 +55,30 @@ export const editPost = (body, id, title) => {
                  credentials: 'include', 
                  headers, 
                  method: 'PUT'
-               } 
-         ).then((response) => response.json()
+               })
+         .then((response) => response.json()
          .then((json) => updatedPost(json) ))
          .catch((errors) =>  updatedPostFailure(errors) )
 }
 
 export const getPostId = (id) => {
-    fetch(`${baseUrl}/posts/${id}`, { credentials: 'include', headers } 
-         ).then((posts) => posts.json()
+    fetch(`${baseUrl}/posts/${id}`, { credentials: 'include', headers })
+        .then((posts) => posts.json()
         .then((json) => receivedAllPosts(json) ))
         .catch((errors) => receivedAllPostsFailure(errors) )
 }
 
 export const getPosts = () => {
-   fetch(`${baseUrl}/posts/`, { credentials: 'include', headers } 
-         ).then((posts) => posts.json()
+   fetch(`${baseUrl}/posts/`, { credentials: 'include', headers })
+        .then((posts) => posts.json()
         .then((json) => receivedAllPosts(json) ))
         .catch((errors) => receivedAllPostsFailure(errors) )
 }
 
 export const getPostsCategory = (category) => {
     const categoryTerm = category.substring(category.indexOf('?'));
-    fetch(`${baseUrl}/${categoryTerm}/posts/`, { credentials: 'include', headers } 
-         ).then((posts) => posts.json()
+    fetch(`${baseUrl}/${categoryTerm}/posts/`, { credentials: 'include', headers })
+        .then((posts) => posts.json()
         .then((json) => receivedAllPosts(json) ))
         .catch((errors) => receivedAllPostsFailure(errors) )
 }
@@ -87,8 +88,8 @@ export const vote = (id, vote) => {
                  credentials: 'include', 
                  headers, 
                  method: 'POST'
-               } 
-         ).then((response) => response.json()
+               })
+         .then((response) => response.json()
          .then((json) => postedVote(json) ))
          .catch((errors) =>  postedVoteFailure(errors) )
 }

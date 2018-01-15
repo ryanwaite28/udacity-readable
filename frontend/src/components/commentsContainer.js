@@ -21,13 +21,7 @@ class CommentsContainer extends React.Component {
  }
 
  render() {
-  let { comment, comments } = this.props;
-
-  if(comments) {
-    comments = JSON.parse(comments);
-    comments = applyUpdate(comment, comments);
-    comments = filterComponents(comments);
-  }
+  const { comments } = this.props;
    
   const hasComments = !isEmptyObject(comments);
 
@@ -54,9 +48,16 @@ class CommentsContainer extends React.Component {
 }
 
 function mapStateToProps({ commentsReducer }) {
+  const { comment, comments } = commentsReducer;
+  let newComments = comments;
+   if(newComments) {
+    newComments = JSON.parse(comments);
+    if(comment) newComments = applyUpdate(JSON.parse(comment), newComments);
+    newComments = filterComponents(newComments);
+  }
+  
   return {
-    comment: commentsReducer['comment'],
-    comments: commentsReducer['comments']
+    comments: newComments
   };
 }
 

@@ -26,15 +26,16 @@ export function createdComment (comment) {
 
 export function createdCommentFailure (errors) {
   return store.dispatch({
-    type: DELETED_COMMENT_FAILURE,
+    type: CREATED_COMMENT_FAILURE,
     errors: errors
   });
 }
 
 export function deletedComment (component) {
+  console.log('component', component);
   return store.dispatch({
     type: DELETED_COMMENT,
-    comments: component
+    comment: component
   });
 }
 

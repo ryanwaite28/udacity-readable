@@ -46,8 +46,10 @@ function CommentsReducer (state = [], action) {
       }
     case DELETED_COMMENT:
       console.log(PREFIX + 'Comment was deleted.');
+      console.log(action);
       return {
         ...state,
+        comment: action.comment,
         isError: false
       }
     case DELETED_COMMENT_FAILURE: 
