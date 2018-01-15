@@ -1,3 +1,19 @@
+export function applyDelete(componentToDelete, list) {
+  let updatedList = list;
+  if(componentToDelete && list) {
+    updatedList = [].concat(list).map((component) => {
+      if(componentToDelete.id===component.id) { 
+        componentToDelete = component;
+        componentToDelete.deleted = true;
+        return componentToDelete;
+      } else {
+        return component;
+      }
+    });
+  }
+  return updatedList;
+}
+
 export function applyUpdate(updatedComponent, list) {
   let isNewComponent = true;
   let updatedList = list;

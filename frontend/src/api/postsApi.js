@@ -43,7 +43,7 @@ export const deletePost = (component) => {
   const url = baseUrl + '/posts/' + component.id;
   fetch(url, { credentials: 'include', headers, method: 'DELETE'} )
        .then((response) => response.text()
-       .then((data) => deletedPost(data) )
+       .then((data) => deletedPost(component) )
        .catch((errors) =>  deletedPostFailure(errors) ));
 }
 

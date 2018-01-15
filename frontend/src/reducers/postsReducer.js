@@ -1,6 +1,6 @@
 // postsReducer.js
 
-import { applyUpdate } from './../utils/helperMethods';
+import { applyDelete, applyUpdate } from './../utils/helperMethods';
 import { 
   CREATED_POST,
   CREATED_POST_FAILURE,
@@ -36,7 +36,7 @@ export default function postsReducer (state = {}, action) {
       console.log(PREFIX + 'Post was deleted.');
       return {
         ...state,
-        posts: applyUpdate(action.post, state.posts),
+        posts: applyDelete(action.post, state.posts),
         isError: false
       }
     case DELETED_POST_FAILURE:
