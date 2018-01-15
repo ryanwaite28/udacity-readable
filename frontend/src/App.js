@@ -1,4 +1,5 @@
 import React from 'react';
+import AddComponent from './pages/addComponent';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Category from './pages/category';
 import Details from './pages/details';
@@ -12,6 +13,7 @@ const App = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path='/' component={Home}/>
+          <Route exact path = '/add' component={AddComponent}/>
           <Route exact path = '/:category/:post_id' component={Details}/>
           <Route exact path='/:category' component={Category}/>
         </Switch>

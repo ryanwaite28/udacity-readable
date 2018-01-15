@@ -57,10 +57,10 @@ class PostContainer extends React.Component {
     if(posts) {
       posts  = filterComponents(posts);
       if(!isDetailPage) posts = this.sortPosts(posts);
-      hasPosts = true;
+      posts = [].concat(posts);
     }
 
-   posts = [].concat(posts);
+   if(posts && posts.length > 0) hasPosts = true;
 
     return (
       <div>

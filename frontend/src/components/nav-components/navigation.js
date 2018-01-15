@@ -6,6 +6,7 @@ import { createPost } from './../../api/postsApi';
 import { connect } from 'react-redux';
 import { getCategories } from './../../api/categoriesApi';
 import Icons from 'uikit/dist/js/uikit-icons';
+import { Link } from 'react-router-dom';
 import SubNavigation from './subNavigation';
 import UIkit from 'uikit';
 import 'uikit/dist/css/uikit.min.css';
@@ -29,7 +30,6 @@ class Navigation extends React.Component {
 
   render() {
     const { categories } = this.props;
-    
     return (
       <div>
         <nav className="uk-navbar-container uk-margin uk-padding-small" 
@@ -47,9 +47,9 @@ class Navigation extends React.Component {
 
           <div className="uk-navbar-right uk-navbar-item">
             <div className="uk-padding-small">
-              <button data-uk-toggle="target: #modal_" data-uk-icon="icon: plus">
-              </button>
-              <CreateEditModal categories={categories} component='' createComponent={createPost}/>
+                <Link to={{ pathname: "/add", params: { dropDown: categories }}} style={{ color: 'gray' }}>
+                  <span data-uk-icon="icon: plus"/>
+                </Link>
             </div>
           </div>
         </nav>
