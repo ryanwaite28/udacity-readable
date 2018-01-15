@@ -32,5 +32,11 @@ export function filterComponents(components) {
 
 
 export function isEmptyObject(componentToCheck) {
-  return !(componentToCheck && Object.keys(componentToCheck).length > 0);
+  let isEmpty = true;
+  if(componentToCheck) {
+    for(let i = 0; i < componentToCheck.length; i++) {
+      if(componentToCheck[i]) isEmpty = false;
+    }
+  }
+  return isEmpty;
 }

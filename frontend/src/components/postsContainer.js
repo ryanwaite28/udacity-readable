@@ -51,24 +51,18 @@ class PostContainer extends React.Component {
   }
 
   render() {
-    let { post, posts } = this.props;
+    let { isDetailPage, posts } = this.props;
     let hasPosts = false;
 
     if(posts) {
-      posts  = applyUpdate(post, posts);
-      posts  = filterComponents(posts);
       posts = this.sortPosts(posts);
       hasPosts = !isEmptyObject(posts);
-    } else if(post) {
-      post = applyUpdate(post, post);
-      post = filterComponents(posts);
-      hasPosts = true;
     }
 
     return (
       <div>
         <div> 
-          { hasPosts && <SortBar components={posts} setSortType={this.setSortType}/> } 
+          { hasPosts && !isDetailPage && <SortBar components={posts} setSortType={this.setSortType}/> } 
         </div>
         <div className='postItem'>
           <h1>{this.getHeader()}</h1>
@@ -81,8 +75,8 @@ class PostContainer extends React.Component {
             })
           }
           { !hasPosts &&  (
-            ( post && <div>No posts with this id were found.</div> ) ||
-            ( !post && <div>No posts were found. Be the first to create a post!</div> ))
+            ( this.isDetailPage && <div>No posts with this id were found.</div> ) ||
+            ( !this.isDetailPage && <div>No posts were found. Be the first to create a post!</div> ))
           }
         </div>
       </div>
@@ -91,9 +85,15 @@ class PostContainer extends React.Component {
 }
 
 function mapStateToProps({ postsReducer }) {
+  let newPost = postsReducer['post'];
+  let newPosts = postsReducer['posts'];
+  if(newPost) {
+    newPosts = applyUpdate(newPost, newPosts);
+    newPosts  = filterComponents(newPosts);
+  }
   return {
-    post: postsReducer['post'],
-    posts: postsReducer['posts']
+    post: newPost,
+    posts: newPosts
   };
 }
 
