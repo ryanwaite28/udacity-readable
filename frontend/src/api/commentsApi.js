@@ -52,9 +52,9 @@ export const deleteComment = (component) => {
 }
 
 export const editComment = (body, id, title) => {
-  const url = baseUrl + '/posts/' + id;
+  const url = baseUrl + '/comments/' + id;
   fetch(url, { body: JSON.stringify({ title, body }),
-               credentials, 
+               credentials: 'include', 
                headers, 
                method: 'PUT'
              } 

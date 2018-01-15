@@ -6,10 +6,13 @@ import PostContainer from './../components/postsContainer';
 import './pages.css';
 
 const Category = () => {
+  
+  const CATEGORY = window.location.search.substring(1);
+  
   return (
     <div>
       <Navigation />
-      <PostContainer isDetailPage={false} category={window.location.search.substring(1)}/>
+      <PostContainer isDetailPage={false} category={CATEGORY}/>
     </div>
   );
 }

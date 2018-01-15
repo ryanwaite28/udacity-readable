@@ -1,5 +1,6 @@
 // commentsReducer.js
 
+import { applyUpdate } from './../utils/helperMethods';
 import {
   COMMENT_VOTE,
   COMMENT_VOTE_FAILURE,
@@ -20,7 +21,7 @@ function CommentsReducer (state = [], action) {
       console.log(PREFIX + 'Comment received vote.');
       return {
         ...state,
-        comment: action.comment,
+        comments: applyUpdate(action.comment, state.comments),
         isError: false
       }
     case COMMENT_VOTE_FAILURE:
@@ -34,7 +35,7 @@ function CommentsReducer (state = [], action) {
       console.log(PREFIX + 'Comment was created.');
       return {
         ...state,
-        comment: action.comment,
+        comments: state.comments.concat(action.comment),
         isError: false
       }
     case CREATED_COMMENT_FAILURE: 
@@ -46,10 +47,9 @@ function CommentsReducer (state = [], action) {
       }
     case DELETED_COMMENT:
       console.log(PREFIX + 'Comment was deleted.');
-      console.log(action);
       return {
         ...state,
-        comment: action.comment,
+        comments: applyUpdate(JSON.parse(action.comment), state.comments),
         isError: false
       }
     case DELETED_COMMENT_FAILURE: 
@@ -63,7 +63,7 @@ function CommentsReducer (state = [], action) {
       console.log(PREFIX + 'Comments have been received.');
       return {
         ...state,
-        comments: action.comments,
+        comments: JSON.parse(action.comments),
         isError: false
       }
     case GET_COMMENTS_FAILURE: 
@@ -77,7 +77,7 @@ function CommentsReducer (state = [], action) {
       console.log(PREFIX + 'Comment was updated.');
       return {
         ...state,
-        comment: action.comment,
+        comments: applyUpdate(action.comment, state.comments),
         isError: false
       }
     case UPDATED_COMMENT_FAILURE: 

@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getPostId, getPosts, getPostsCategory } from './../api/postsApi';
-import { applyUpdate, filterComponents, isEmptyObject } from './../utils/helperMethods';
+import { filterComponents, isEmptyObject } from './../utils/helperMethods';
 import Post from './post';
 import SortBar from './sortBar';
 
@@ -55,9 +55,12 @@ class PostContainer extends React.Component {
     let hasPosts = false;
 
     if(posts) {
-      posts = this.sortPosts(posts);
-      hasPosts = !isEmptyObject(posts);
+      posts  = filterComponents(posts);
+      if(!isDetailPage) posts = this.sortPosts(posts);
+      hasPosts = true;
     }
+
+   posts = [].concat(posts);
 
     return (
       <div>
@@ -66,7 +69,7 @@ class PostContainer extends React.Component {
         </div>
         <div className='postItem'>
           <h1>{this.getHeader()}</h1>
-          { hasPosts && posts.map((post, key) => {
+          { hasPosts && Object.keys(posts).length > 0 && posts.map((post, key) => {
               return (
                 <div key={key}>
                   <Post isDetailPage={this.isDetailPage} fetchedPost={post}/>
@@ -85,15 +88,8 @@ class PostContainer extends React.Component {
 }
 
 function mapStateToProps({ postsReducer }) {
-  let newPost = postsReducer['post'];
-  let newPosts = postsReducer['posts'];
-  if(newPost) {
-    newPosts = applyUpdate(newPost, newPosts);
-    newPosts  = filterComponents(newPosts);
-  }
   return {
-    post: newPost,
-    posts: newPosts
+    posts:  postsReducer['posts']
   };
 }
 

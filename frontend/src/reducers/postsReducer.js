@@ -1,5 +1,6 @@
 // postsReducer.js
 
+import { applyUpdate } from './../utils/helperMethods';
 import { 
   CREATED_POST,
   CREATED_POST_FAILURE,
@@ -13,6 +14,7 @@ import {
   UPDATED_POST_FAILURE
 } from './../actions/postsActions';
 
+
 export default function postsReducer (state = {}, action) {
   const PREFIX = 'Reducer status: ';
   switch (action.type) {
@@ -20,7 +22,7 @@ export default function postsReducer (state = {}, action) {
       console.log(PREFIX + 'Post was created.');
       return {
         ...state,
-        post: action.post,
+        posts: state.posts.concat(action.post),
         isError: false
     }
     case CREATED_POST_FAILURE:
@@ -34,7 +36,7 @@ export default function postsReducer (state = {}, action) {
       console.log(PREFIX + 'Post was deleted.');
       return {
         ...state,
-        post: post,
+        posts: applyUpdate(action.post, state.posts),
         isError: false
       }
     case DELETED_POST_FAILURE:
@@ -62,7 +64,7 @@ export default function postsReducer (state = {}, action) {
       console.log(PREFIX + 'Posts have received vote.');
       return {
         ...state,
-        post: action.post,
+        posts: applyUpdate(action.post, state.posts),
         isError: false
       }
     case POST_VOTE_FAILURE:
@@ -76,7 +78,7 @@ export default function postsReducer (state = {}, action) {
       console.log(PREFIX + 'Post was updated.');
       return {
         ...state,
-        post: action.post,
+        posts: applyUpdate(action.post, state.posts),
         isError: false
       }
     case UPDATED_POST_FAILURE:

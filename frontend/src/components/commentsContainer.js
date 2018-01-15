@@ -1,7 +1,7 @@
 // commentsContainer.js
 
 import React from 'react';
-import { applyUpdate, filterComponents, isEmptyObject } from './../utils/helperMethods';
+import { filterComponents, isEmptyObject } from './../utils/helperMethods';
 import Comment from './comment';
 import { connect } from 'react-redux';
 import { getComments } from './../api/commentsApi';
@@ -21,10 +21,11 @@ class CommentsContainer extends React.Component {
  }
 
  render() {
-  const { comments } = this.props;
-   
+  let { comments } = this.props;
+  
   const hasComments = !isEmptyObject(comments);
-
+  if(comments) comments = filterComponents(comments);
+   
   return (
    <div>
      <h1 className="uk-padding-small" style={this.styles.title}>
@@ -48,16 +49,8 @@ class CommentsContainer extends React.Component {
 }
 
 function mapStateToProps({ commentsReducer }) {
-  const { comment, comments } = commentsReducer;
-  let newComments = comments;
-   if(newComments) {
-    newComments = JSON.parse(comments);
-    if(comment) newComments = applyUpdate(JSON.parse(comment), newComments);
-    newComments = filterComponents(newComments);
-  }
-  
   return {
-    comments: newComments
+    comments: commentsReducer['comments']
   };
 }
 

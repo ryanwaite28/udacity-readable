@@ -12,13 +12,14 @@ class CreateEditModal extends React.Component {
       }
     }
     
-    this.componentPassed = props.component;  
-          
+    this.componentPassed = props.component;
     this.header = 'Create A Post';
-    if(this.componentPassed) this.header = 'Edit A Post';
-    
     this.id = '';
-    if(this.componentPassed) this.id = this.componentPassed.id;
+    
+    if(this.componentPassed) {
+      this.header = 'Edit A Post';
+      this.id = this.componentPassed.id;
+    }
   }
   
   getDefaultValue = (elementToCheck) => {
@@ -38,15 +39,24 @@ class CreateEditModal extends React.Component {
   }
 
   handleOnSubmit = () => {
-    const author = document.getElementById("authorInput_" + this.id).value;
-    const body = document.getElementById("bodyInput_" + this.id).value;
-    const title = document.getElementById("titleInput_" + this.id).value;
+   
+    let authorElement = document.getElementById("authorInput_" + this.id);
+    const author = authorElement.value;
+    
+    let bodyElement = document.getElementById("bodyInput_" + this.id);
+    const body = bodyElement.value;
+    
+    let titleElement =  document.getElementById("titleInput_" + this.id);
+    const title = titleElement.value;
     
     if(this.componentPassed) {
       this.props.editComponent(body, this.id, title);
     } else {
       const category = document.getElementById("categoriesInput_" + this.id).value;
       this.props.createComponent(author, body, category, title);
+      authorElement.value = '';
+      bodyElement.value = '';
+      titleElement.value = '';
     }
   }
   

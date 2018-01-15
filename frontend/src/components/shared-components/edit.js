@@ -4,28 +4,32 @@ import React from 'react';
 import CreateEditModal from './createEditModal';
 import UIkit from 'uikit';
 
-const Edit = ({ component, editComponent }) => {
+class Edit extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.component = props.component;
+    this.id = '';
+    if(this.component) this.id = props.component.id;
+  }
 
-  this.getId = () => {
-    let id = '';
-    if(component) id = component.id;
-    return id;
+  handleShowModal = () => {
+     console.log(this.component)
+     UIkit.modal("#modal_" + this.id).toggle();
   }
   
-  this.handleShowModal = () => {
-    UIkit.modal("#modal_" + this.getId()).toggle();
-  }
-  
+render() {
   return (
     <span>
-      <button data-uk-toggle={"target: #modifyDropDown_" + this.getId()}
+      <button data-uk-toggle={"target: #modifyDropDown_" + this.id}
               data-uk-icon="icon: pencil"
               onClick={() => this.handleShowModal()}
               type="button">
       </button>
-    <CreateEditModal component={component}  editComponent={editComponent}/>
+      <CreateEditModal component={this.component}  editComponent={this.props.editComponent}/>
   </span>
   );
+}
 }
 
 export default Edit;
