@@ -5,8 +5,8 @@ import AddContainer from './../components/addContainer';
 import Navigation from './../components/nav-components/navigation';
 import './pages.css';
 
-const AddComponent = () => {
-
+const AddComponent = ({ isDetailPage }) => {
+  
   return (
     <div>
       <Navigation />

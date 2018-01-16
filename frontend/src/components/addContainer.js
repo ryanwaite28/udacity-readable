@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { createPost } from './../api/postsApi';
+import { createComment } from './../api/commentsApi';
 import { connect } from 'react-redux';
 
 class AddContainer extends React.Component {
@@ -25,7 +26,7 @@ class AddContainer extends React.Component {
       }
     }
     
-    this.header = 'Create A Post';
+    this.header = (this.props.isDetailPage ? 'Create A Comment' : 'Create A Post'); 
   }
 
   handleAuthorChange = (event) => {
@@ -45,13 +46,17 @@ class AddContainer extends React.Component {
   }
 
   handleOnSubmit = () => {
-    const { author, body, title } = this.state;
+    const { author, body, id, title } = this.state;
     const categoryProp = this.props.categories;
     
     let { category } = this.state;
     if(!category && categoryProp) category = JSON.parse(categoryProp).categories[0].name;
     
-    createPost(author, body, category, title);
+    ( this.props.isDetailPage 
+      ? createComment(author, body, id, title)
+      : createPost(author, body, category, title)
+    ); 
+    
     this.setState({ author: '', body: '', category: '', title: '' });
   }
   
