@@ -1,8 +1,6 @@
 // nagivation.js
 
 import React from 'react';
-import CreateEditModal from './../shared-components/createEditModal';
-import { createPost } from './../../api/postsApi';
 import { connect } from 'react-redux';
 import { getCategories } from './../../api/categoriesApi';
 import Icons from 'uikit/dist/js/uikit-icons';
@@ -29,7 +27,17 @@ class Navigation extends React.Component {
   }
 
   render() {
-    const { categories } = this.props;
+    const { categories, isDetailPage } = this.props;
+    
+    let path = "/add";
+    if(isDetailPage) {
+      const URL = window.location.href;
+      const BASE_URL = window.location.origin;
+      const firstSlash = URL.substring(URL.indexOf(BASE_URL) + BASE_URL.length + 1);                
+      const category = firstSlash.substring(0, URL.indexOf('/') - 1 );
+      path = "/add/" + category;
+    }
+    
     return (
       <div>
         <nav className="uk-navbar-container uk-margin uk-padding-small" 
@@ -47,7 +55,7 @@ class Navigation extends React.Component {
 
           <div className="uk-navbar-right uk-navbar-item">
             <div className="uk-padding-small">
-                <Link to={{ pathname: "/add", params: { dropDown: categories }}} style={{ color: 'gray' }}>
+                <Link to={{ pathname: path, params: { dropDown: categories }}} style={{ color: 'gray' }}>
                   <span data-uk-icon="icon: plus"/>
                 </Link>
             </div>

@@ -12,7 +12,7 @@ class PostContainer extends React.Component {
     super(props)
     
     this.state = {
-      sort: 'Votes'
+      sort: 'Date'
     }
      
     this.isDetailPage = props.isDetailPage;
@@ -52,7 +52,6 @@ class PostContainer extends React.Component {
 
   render() {
     let { isDetailPage, posts } = this.props;
-    let hasPosts = false;
 
     if(posts) {
       posts  = filterComponents(posts);
@@ -60,12 +59,14 @@ class PostContainer extends React.Component {
       posts = [].concat(posts);
     }
 
-   if(posts && posts.length > 0) hasPosts = true;
+   const hasPosts = (posts && posts.length > 0);
 
     return (
       <div>
         <div> 
-          { hasPosts && !isDetailPage && <SortBar components={posts} setSortType={this.setSortType}/> } 
+          { hasPosts && !isDetailPage && 
+             <SortBar components={posts} setSortType={this.setSortType}/> 
+          } 
         </div>
         <div className='postItem'>
           <h1>{this.getHeader()}</h1>
