@@ -20,9 +20,17 @@ export default function postsReducer (state = {}, action) {
   switch (action.type) {
     case CREATED_POST:
       console.log(PREFIX + 'Post was created.');
+      
+      let newPosts = state.posts;
+      if(newPosts) { 
+        newPosts = newPosts.concat(action.post) ;
+      } else { 
+        newPosts = [].concat(action.post) ;
+      };
+      
       return {
         ...state,
-        posts: state.posts.concat(action.post),
+        posts: newPosts,
         isError: false
     }
     case CREATED_POST_FAILURE:

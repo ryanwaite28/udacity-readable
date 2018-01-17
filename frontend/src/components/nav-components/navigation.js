@@ -24,19 +24,13 @@ class Navigation extends React.Component {
         boxShadow: 'rgb(167, 167, 167) 2px 2px 4px 1px'
       }
     }
+    this.path = '/add';
+    if(props.category) this.path = this.path + '/' + props.category;
+    if(props.id) this.path = this.path + '/' + props.id;
   }
 
   render() {
-    const { categories, isDetailPage } = this.props;
-    
-    let path = "/add";
-    if(isDetailPage) {
-      const URL = window.location.href;
-      const BASE_URL = window.location.origin;
-      const firstSlash = URL.substring(URL.indexOf(BASE_URL) + BASE_URL.length + 1);                
-      const category = firstSlash.substring(0, URL.indexOf('/') - 1 );
-      path = "/add/" + category;
-    }
+    const { categories } = this.props;
     
     return (
       <div>
@@ -55,7 +49,7 @@ class Navigation extends React.Component {
 
           <div className="uk-navbar-right uk-navbar-item">
             <div className="uk-padding-small">
-                <Link to={{ pathname: path, params: { dropDown: categories }}} style={{ color: 'gray' }}>
+                <Link to={{ pathname: this.path }} style={{ color: 'gray' }}>
                   <span data-uk-icon="icon: plus"/>
                 </Link>
             </div>

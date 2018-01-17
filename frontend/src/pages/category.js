@@ -5,14 +5,12 @@ import Navigation from './../components/nav-components/navigation';
 import PostContainer from './../components/postsContainer';
 import './pages.css';
 
-const Category = () => {
-  
-  const CATEGORY = window.location.search.substring(1);
+const Category = ({ match }) => {
   
   return (
     <div>
-      <Navigation />
-      <PostContainer isDetailPage={false} category={CATEGORY}/>
+      <Navigation category={match.params.category} id={match.params.post_id}/>
+      <PostContainer category={match.params.category} />
     </div>
   );
 }

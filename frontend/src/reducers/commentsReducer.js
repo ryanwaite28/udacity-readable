@@ -33,9 +33,17 @@ function CommentsReducer (state = [], action) {
       }
     case CREATED_COMMENT:
       console.log(PREFIX + 'Comment was created.');
+      let newComments = state.comments;
+      
+      if(newComments) { 
+        newComments = newComments.concat(action.comment) ;
+      } else { 
+        newComments = [].concat(action.comment) ;
+      };
+      
       return {
         ...state,
-        comments: state.comments.concat(action.comment),
+        comments: newComments,
         isError: false
       }
     case CREATED_COMMENT_FAILURE: 

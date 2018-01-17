@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getPostId, getPosts, getPostsCategory } from './../api/postsApi';
-import { filterComponents, isEmptyObject } from './../utils/helperMethods';
+import { filterComponents } from './../utils/helperMethods';
 import Post from './post';
 import SortBar from './sortBar';
 
@@ -62,14 +62,13 @@ class PostContainer extends React.Component {
    const hasPosts = (posts && posts.length > 0);
 
     return (
-      <div>
-        <div> 
-          { hasPosts && !isDetailPage && 
-             <SortBar components={posts} setSortType={this.setSortType}/> 
-          } 
-        </div>
-        <div className='postItem'>
-          <h1>{this.getHeader()}</h1>
+      <div className='postItem'>
+        { !isDetailPage && <h1>{this.getHeader()}</h1> }
+         <div> 
+           { hasPosts && !isDetailPage && 
+              <SortBar components={posts} setSortType={this.setSortType}/> 
+            } 
+          </div>
           { hasPosts && Object.keys(posts).length > 0 && posts.map((post, key) => {
               return (
                 <div key={key}>
@@ -83,7 +82,6 @@ class PostContainer extends React.Component {
             ( !this.isDetailPage && <div>No posts were found. Be the first to create a post!</div> ))
           }
         </div>
-      </div>
     );
   }
 }

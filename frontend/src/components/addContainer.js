@@ -4,6 +4,7 @@ import React from 'react';
 import { createPost } from './../api/postsApi';
 import { createComment } from './../api/commentsApi';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class AddContainer extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class AddContainer extends React.Component {
       }
     }
     
-    this.header = (this.props.isDetailPage ? 'Create A Comment' : 'Create A Post'); 
+    this.header = (props.id ? 'Create A Comment' : 'Create A Post'); 
   }
 
   handleAuthorChange = (event) => {
@@ -46,21 +47,24 @@ class AddContainer extends React.Component {
   }
 
   handleOnSubmit = () => {
-    const { author, body, id, title } = this.state;
+    const { author, body, title } = this.state;
     const categoryProp = this.props.categories;
     
     let { category } = this.state;
     if(!category && categoryProp) category = JSON.parse(categoryProp).categories[0].name;
     
-    ( this.props.isDetailPage 
-      ? createComment(author, body, id, title)
+    ( this.props.id 
+      ? createComment(author, body, this.props.id, title)
       : createPost(author, body, category, title)
-    ); 
-    
-    this.setState({ author: '', body: '', category: '', title: '' });
+    );
   }
   
   render() {
+    let { category, categories, id } = this.props;
+    let originUrl = '';
+    if(category) originUrl = originUrl + '/' + category;
+    if(id) originUrl = originUrl + '/' + id;
+
     return (
        <div>
           <form className="uk-position-center" style={{ width: '80%' }}>
@@ -81,20 +85,21 @@ class AddContainer extends React.Component {
                      onChange={(event) => this.handleTitleChange(event) }
                      type="text"/>
             </div>
-            { this.props.categories && <div className="uk-margin">
-              <span style={this.styles.sectionTitle}>Categories</span>  
-              <select className="uk-select" 
-                      onChange={(event) => this.handleCategoryChange(event) }>
-                { JSON.parse(this.props.categories).categories.map((category, key) => { 
-                    return ( 
-                      <option key={key}>
-                        {category.name}
-                      </option> 
-                    );
-                  })
-                }
-              </select>
-            </div> 
+            { !id &&
+              <div className="uk-margin">
+                <span style={this.styles.sectionTitle}>Categories</span>  
+                <select className="uk-select" 
+                        onChange={(event) => this.handleCategoryChange(event) }>
+                  { categories && JSON.parse(categories).categories.map((category, key) => { 
+                      return ( 
+                        <option key={key}>
+                          {category.name}
+                        </option> 
+                      );
+                    })
+                  }
+                </select>
+              </div> 
             }
             <div className="uk-margin">
               <span style={this.styles.sectionTitle}>Content</span>
@@ -105,15 +110,15 @@ class AddContainer extends React.Component {
                         type="text"/>
             </div>
             <div className="uk-margin uk-footer uk-align-right">
-              <a className="uk-button uk-button-default" 
-                 href={"/" + this.state.category}>
+              <Link className="uk-button uk-button-default" 
+                    to={{ pathname: originUrl }}>
                 Cancel
-              </a>
-              <a className="uk-button uk-button-default"     
-                 href="/"
-                 onClick={() => this.handleOnSubmit()}>
+              </Link>
+              <Link className="uk-button uk-button-default"     
+                    to={{ pathname: originUrl }}
+                    onClick={() => this.handleOnSubmit()}>
                 Submit
-              </a>
+              </Link>
             </div>
           </form>
         </div>

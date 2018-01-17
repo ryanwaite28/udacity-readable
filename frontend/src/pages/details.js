@@ -6,16 +6,13 @@ import Navigation from './../components/nav-components/navigation';
 import PostContainer from './../components/postsContainer';
 import './pages.css';
 
-const Details = () => {
-  
-  const URL = window.location.href; 
-  const ID = URL.substring(URL.lastIndexOf('/') + 1);
+const Details = ({ match }) => {
   
   return (
     <div>
-      <Navigation isDetailPage={true}/>
-      <PostContainer id={ID} isDetailPage={true}/>
-      <CommentsContainer id={ID}/>
+      <Navigation category={match.params.category} id={match.params.post_id}/>
+      <PostContainer id={match.params.post_id} isDetailPage={true} />
+      <CommentsContainer id={match.params.post_id} />
     </div>
   );
 }

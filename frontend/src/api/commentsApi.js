@@ -16,10 +16,6 @@ import {
 const baseUrl =  `${process.env.REACT_APP_BACKEND}`;
 const uuid = require('uuid/v1');
 
-const credentials = {
-  credentials: 'include'
-};
-
 const headers = { 
   'Authorization': 'whatever-you-want', 
   'Content-Type': 'application/json' 
@@ -34,7 +30,7 @@ export const createComment = (author, body, id, title) => {
                 timestamp: Date.now(),
                 parentId: id,
               }),
-               credentials, 
+               credentials: 'include', 
                headers, 
                method: 'POST'
              } 

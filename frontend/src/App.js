@@ -13,9 +13,9 @@ const App = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path='/' component={Home}/>
-          <Route exact path = '/add' component={AddComponent}/>
-          <Route exact path = '/add/:category' component={() => <AddComponent isDetailPage={true}/>}/>
-          <Route exact path = '/:category/:post_id' component={Details}/>
+          <Route exact path ='/add' component={AddComponent}/>
+          <Route exact path ='/add/:category/:post_id' component={AddComponent}/>
+          <Route exact path ='/:category/:post_id' component={Details}/>
           <Route exact path='/:category' component={Category}/>
         </Switch>
       </BrowserRouter>
