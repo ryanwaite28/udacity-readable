@@ -5,6 +5,7 @@ import { filterComponents, isEmptyObject } from './../utils/helperMethods';
 import Comment from './comment';
 import { connect } from 'react-redux';
 import { getComments } from './../api/commentsApi';
+import { Link } from 'react-router-dom';
 
 class CommentsContainer extends React.Component {
   constructor(props) {
@@ -22,9 +23,8 @@ class CommentsContainer extends React.Component {
 
  render() {
   let { comments } = this.props;
-  
-  const hasComments = !isEmptyObject(comments);
   if(comments) comments = filterComponents(comments);
+  const hasComments = !isEmptyObject(comments);
    
   return (
    <div>
@@ -40,7 +40,11 @@ class CommentsContainer extends React.Component {
        }
        { !hasComments &&
          <div className="uk-padding-small">
-           No comments were found for this post. Be the first to create add a comment!
+           No comments were found for this post. 
+           <span>  </span>
+           <Link to={{ pathname: `/add/${this.props.category}/${this.props.id}` }}>
+             Click here to create a comment!
+           </Link>
          </div>
        }
      </div>
