@@ -60,6 +60,7 @@ class PostContainer extends React.Component {
     }
 
    const hasPosts = (posts && posts.length > 0);
+   if(!hasPosts && isDetailPage) window.location.href = '/';
 
     return (
       <div className='postItem'>
@@ -77,9 +78,8 @@ class PostContainer extends React.Component {
               );
             })
           }
-          { !hasPosts &&  (
-            ( this.isDetailPage && <div>No posts with this id were found.</div> ) ||
-            ( !this.isDetailPage && <div>No posts were found. Be the first to create a post!</div> ))
+          { !hasPosts && !this.isDetailPage && 
+              <div>No posts were found. Be the first to create a post!</div>
           }
         </div>
     );
