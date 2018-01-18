@@ -28,7 +28,7 @@ class CommentsContainer extends React.Component {
    
   return (
    <div>
-     <h1 className="uk-padding-small" style={this.styles.title}>
+     <h1 className='uk-padding-small' style={this.styles.title}>
        Comments
      </h1>
      <hr/>
@@ -39,7 +39,7 @@ class CommentsContainer extends React.Component {
          })
        }
        { !hasComments &&
-         <div className="uk-padding-small">
+         <div className='uk-padding-small'>
            No comments were found for this post. 
            <span>  </span>
            <Link to={{ pathname: `/add/${this.props.category}/${this.props.id}` }}>

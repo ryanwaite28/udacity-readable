@@ -41,41 +41,40 @@ class EditModal extends React.Component {
   
   render() {
     const { body, id, title } = this.state;
-    const { categories } = this.props;
 
     return (
-      <div data-uk-modal id={"modal_" + id}>
-        <div className="uk-modal-dialog uk-modal-body ">
-          <button className="uk-modal-close-default" 
-                  data-uk-close type="button">
+      <div data-uk-modal id={'modal_' + id}>
+        <div className='uk-modal-dialog uk-modal-body'>
+          <button className='uk-modal-close-default' 
+                  data-uk-close type='button'>
           </button>
-          <h2 className="uk-modal-title">{this.header}</h2>
-          <form id="form">
-            <div className="uk-margin">
+          <h2 className='uk-modal-title'>{this.header}</h2>
+          <form id='form'>
+            <div className='uk-margin'>
               <span style={this.styles.sectionTitle}>Title</span>  
               <input className="uk-input" 
-                     id={"titleInput_" + id}
+                     id={'titleInput_' + id}
                      onChange={(event) => this.handleTitleChange(event)}
-                     type="text"
+                     type='text'
                      value={title}/>
             </div>
-            <div className="uk-margin">
+            <div className='uk-margin'>
               <span style={this.styles.sectionTitle}>Content</span>
-              <textarea className="uk-textarea" 
-                        id={"bodyInput_" + id}
+              <textarea className='uk-textarea'
+                        id={'bodyInput_' + id}
                         onChange={(event) => this.handleBodyChange(event)}
-                        rows="5" 
-                        type="text" 
+                        rows='5'
+                        type='text'
                         value={body}/>
             </div>
-            <div className="uk-margin uk-footer uk-align-right">
-              <button className="uk-button uk-button-default uk-modal-close" 
-                      type="button">
+            <div className='uk-margin uk-footer uk-align-right'>
+              <button className='uk-button uk-button-default uk-modal-close'
+                      type='button'>
                 Cancel
               </button>
-              <button className="uk-button uk-button-default uk-modal-close" 
+              <button className='uk-button uk-button-default uk-modal-close'
                       onClick={() => this.handleOnSubmit()}
-                      type="button">
+                      type='button'>
                 Submit
               </button>
             </div>

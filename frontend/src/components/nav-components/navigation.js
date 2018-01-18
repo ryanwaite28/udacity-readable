@@ -14,6 +14,7 @@ UIkit.use(Icons);
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
+    
     getCategories();
     
     this.styles = {
@@ -34,23 +35,23 @@ class Navigation extends React.Component {
     
     return (
       <div>
-        <nav className="uk-navbar-container uk-margin uk-padding-small" 
+        <nav className='uk-navbar-container uk-margin uk-padding-small'
              data-uk-navbar 
              style={this.styles.navbar}>
-          <div className="uk-navbar-item">
-            <button data-uk-toggle="target: #sub-nav" data-uk-icon="icon: table">
+          <div className='uk-navbar-item'>
+            <button data-uk-toggle='target: #sub-nav' data-uk-icon='icon: table'>
             </button>
             <SubNavigation categories={categories}/>
           </div>
       
-          <div className="uk-navbar-center">
+          <div className='uk-navbar-center'>
             <h1 style={this.styles.header}>Feed</h1>
           </div>
 
-          <div className="uk-navbar-right uk-navbar-item">
-            <div className="uk-padding-small">
+          <div className='uk-navbar-right uk-navbar-item'>
+            <div className='uk-padding-small'>
                 <Link to={{ pathname: this.path }} style={{ color: 'gray' }}>
-                  <span data-uk-icon="icon: plus"/>
+                  <span data-uk-icon='icon: plus'/>
                 </Link>
             </div>
           </div>

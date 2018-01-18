@@ -23,12 +23,12 @@ const Comment = ({ comment }) => {
   }
 
    return (
-    <div className="uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small" 
+    <div className='uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small' 
          style={this.styles.comment}>
-      <div className="uk-content">
+      <div className='uk-content'>
         <p>{comment.body}</p>
       </div>
-      <ul className="uk-subnav uk-subnav-divider uk-flex-center">
+      <ul className='uk-subnav uk-subnav-divider uk-flex-center'>
         <li>
           <DropDownInfo component={comment}/>
         </li>

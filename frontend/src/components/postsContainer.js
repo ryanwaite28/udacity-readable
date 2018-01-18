@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getPostId, getPosts, getPostsCategory } from './../api/postsApi';
 import { filterComponents } from './../utils/helperMethods';
+import { Link } from 'react-router-dom';
 import Post from './post';
 import SortBar from './sortBar';
 
@@ -52,7 +53,7 @@ class PostContainer extends React.Component {
 
   render() {
     let { isDetailPage, posts } = this.props;
-
+    
     if(posts) {
       posts  = filterComponents(posts);
       if(!isDetailPage) posts = this.sortPosts(posts);
@@ -60,28 +61,36 @@ class PostContainer extends React.Component {
     }
 
    const hasPosts = (posts && posts.length > 0);
-   if(!hasPosts && isDetailPage) window.location.href = '/';
 
-    return (
-      <div className='postItem'>
-        { !isDetailPage && <h1>{this.getHeader()}</h1> }
-         <div> 
-           { hasPosts && !isDetailPage && 
-              <SortBar components={posts} setSortType={this.setSortType}/> 
-            } 
-          </div>
-          { hasPosts && Object.keys(posts).length > 0 && posts.map((post, key) => {
-              return (
-                <div key={key}>
-                  <Post isDetailPage={this.isDetailPage} fetchedPost={post}/>
-                </div>
-              );
-            })
-          }
-          { !hasPosts && !this.isDetailPage && 
-              <div>No posts were found. Be the first to create a post!</div>
-          }
+   // for detail page
+   let postsComponents = [];
+   if(hasPosts) {
+     posts.map((post, key) => {
+       return postsComponents.push(
+         <div key={key}><Post isDetailPage={this.isDetailPage} fetchedPost={post}/></div>
+       )}
+     )
+   }
+
+  return (
+    <div className='postItem'>
+      { !isDetailPage && <h1>{this.getHeader()}</h1> }
+        <div> 
+          { hasPosts && posts.length > 1 &&
+            <SortBar components={posts} setSortType={this.setSortType}/> 
+          } 
         </div>
+        { hasPosts && postsComponents}
+        { !hasPosts && !this.isDetailPage && 
+          <div className='uk-padding-small'>
+           No posts were found.
+           <span>  </span>
+           <Link to={{ pathname: `/add/${this.props.category}` }}>
+             Click here to create a post!
+           </Link>
+         </div>
+        }
+      </div>
     );
   }
 }

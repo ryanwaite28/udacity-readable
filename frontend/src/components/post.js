@@ -17,38 +17,35 @@ const Post = ({ category, fetchedPost, isDetailPage, post }) => {
     }
   }
   
-  if(typeof post === 'string') {
-    post = JSON.parse(post);
-  } else if(!post) {
-    post = fetchedPost;
-  }
-    
+  if(typeof fetchedPost === 'string') fetchedPost = JSON.parse(fetchedPost);
+  
   return (
-    <div className="uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small" 
+    <div className='uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small'
          style={this.styles.post}>
-      <div className="uk-header">
-        <h3 className="uk-card-title" style={this.styles.postTitle}>
-          {post.title}
+      <div className='uk-header'>
+        <h3 className='uk-card-title' style={this.styles.postTitle}>
+          {fetchedPost.title}
         </h3>
       </div>
-      <div className="uk-content">
-        <p>{post.body}</p>
+      <div className='uk-content'>
+        <p>{fetchedPost.body}</p>
       </div>
-      <ul className="uk-subnav uk-subnav-divider uk-flex-center">
+      <ul className='uk-subnav uk-subnav-divider uk-flex-center'>
         <li>
-          <DropDownInfo component={post}/>
+          <DropDownInfo component={fetchedPost}/>
         </li>
         <li>
-          <DropDownModify component={post} 
+          <DropDownModify component={fetchedPost}
                           deleteComponent={deletePost} 
                           editComponent={editPost}
+                          isDetailPage={isDetailPage}
                           vote={vote}/>
         </li>
         { !isDetailPage && 
           <li>
             <a className='uk-text-meta' 
-               href={`${post.category}/${post.id}`} 
-               data-uk-icon="icon: more">
+               href={`${fetchedPost.category}/${fetchedPost.id}`} 
+               data-uk-icon='icon: more'>
             </a>
           </li>
         }
