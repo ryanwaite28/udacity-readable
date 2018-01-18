@@ -23,7 +23,7 @@ class CommentsContainer extends React.Component {
 
  render() {
   let { comments } = this.props;
-  if(comments) comments = filterComponents(comments);
+  if (comments) comments = filterComponents(comments);
   const hasComments = !isEmptyObject(comments);
    
   return (

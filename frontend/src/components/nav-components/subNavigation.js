@@ -2,7 +2,9 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 const SubNavigation = ({ categories }) => {
+  
   return (
     <div data-uk-dropdown='pos: bottom-right' id='sub-nav'>
       <ul className='uk-nav uk-dropdown-nav' id='nav-dropdown'>

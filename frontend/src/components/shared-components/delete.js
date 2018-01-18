@@ -6,7 +6,7 @@ class Delete extends React.Component {
   
   handleDelete = () => {
     this.props.deleteComponent(this.props.component);
-    if(this.props.isDetailPage) window.location.href = '/';
+    if (this.props.isDetailPage) window.location.href = '/';
   }
 
   render () {

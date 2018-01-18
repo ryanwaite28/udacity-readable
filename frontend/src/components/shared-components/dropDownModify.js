@@ -6,16 +6,6 @@ import Delete from './../shared-components/delete';
 import Edit from './../shared-components/edit';
 import VoteScore from './../shared-components/voteScore';
 
-//class DropDownModify extends React.Component {
-//  constructor(props) {
-//    super(props);
-    
-//    this.component = props.component;
-//    this.deleteComponent = props.deleteComponent;
-//    this.editComponent = props.editComponent; 
-//    this.vote = props.vote;
-//  }
-  
 const DropDownModify = ({ component, deleteComponent, editComponent, isDetailPage, vote }) => {
   
   return (

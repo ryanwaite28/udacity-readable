@@ -4,7 +4,7 @@ import React from 'react';
 import './../../styles/dropDownContainers.css';
 
 const DropDownInfo = ({ component, styles }) => {
- console.log('component', component);
+  
   return (
     <div>
       <span className='navIcon' data-uk-icon='icon: info' type='button'/>

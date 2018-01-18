@@ -26,8 +26,8 @@ class Navigation extends React.Component {
       }
     }
     this.path = '/add';
-    if(props.category) this.path = this.path + '/' + props.category;
-    if(props.id) this.path = this.path + '/' + props.id;
+    if (props.category) this.path = this.path + '/' + props.category;
+    if (props.id) this.path = this.path + '/' + props.id;
   }
 
   render() {

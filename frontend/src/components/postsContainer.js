@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { getComments } from './../api/commentsApi';
 import { getPostId, getPosts, getPostsCategory } from './../api/postsApi';
 import { filterComponents } from './../utils/helperMethods';
 import { Link } from 'react-router-dom';
@@ -18,9 +19,9 @@ class PostContainer extends React.Component {
      
     this.isDetailPage = props.isDetailPage;
     
-    if(props.category) {
+    if (props.category) {
       getPostsCategory(props.category);
-    } else if(props.id) {
+    } else if (props.id) {
       getPostId(props.id);
     } else {
       getPosts();
@@ -29,22 +30,22 @@ class PostContainer extends React.Component {
  
   getHeader = () => {
     let header = 'All Categories';
-    if(this.props.category) header = this.props.category;
+    if (this.props.category) header = this.props.category;
     return header;
   }
 
   setSortType = (event) => {
-    if(event && event.target && event.target.value) {
+    if (event && event.target && event.target.value) {
       this.setState({ sort : event.target.value });
     }
   }
 
   sortPosts = (posts) => {
     const sortType = this.state.sort;
-    if(sortType) {
-       if('Date'===sortType) { 
+    if (sortType) {
+       if ('Date' === sortType) { 
         posts = [].concat(posts).sort((a, b) => { return b.timestamp - a.timestamp });
-      } else if('Votes'===sortType) {
+      } else if ('Votes' === sortType) {
         posts = [].concat(posts).sort((a, b) => { return b.voteScore - a.voteScore });
       }
     }
@@ -54,9 +55,9 @@ class PostContainer extends React.Component {
   render() {
     let { isDetailPage, posts } = this.props;
     
-    if(posts) {
+    if (posts) {
       posts  = filterComponents(posts);
-      if(!isDetailPage) posts = this.sortPosts(posts);
+      if (!isDetailPage) posts = this.sortPosts(posts);
       posts = [].concat(posts);
     }
 
@@ -64,7 +65,7 @@ class PostContainer extends React.Component {
 
    // for detail page
    let postsComponents = [];
-   if(hasPosts) {
+   if (hasPosts) {
      posts.map((post, key) => {
        return postsComponents.push(
          <div key={key}><Post isDetailPage={this.isDetailPage} fetchedPost={post}/></div>

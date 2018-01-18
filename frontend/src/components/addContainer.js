@@ -51,8 +51,8 @@ class AddContainer extends React.Component {
     const availableCategories = categories;
     
     let categoryToSet = category_selected;
-    if(!categoryToSet) categoryToSet = category;
-    if(!categoryToSet && availableCategories) 
+    if (!categoryToSet) categoryToSet = category;
+    if (!categoryToSet && availableCategories) 
       categoryToSet = JSON.parse(availableCategories).categories[0].name;
     
     ( this.props.id 
