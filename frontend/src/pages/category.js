@@ -9,7 +9,7 @@ const Category = ({ match }) => {
   
   return (
     <div>
-      <Navigation category={match.params.category} id={match.params.post_id}/>
+      <Navigation category={match.params.category} id={match.params.post_id} />
       <PostContainer category={match.params.category} />
     </div>
   );

@@ -10,7 +10,7 @@ const Details = ({ match }) => {
   
   return (
     <div>
-      <Navigation category={match.params.category} id={match.params.post_id}/>
+      <Navigation category={match.params.category} id={match.params.post_id} />
       <PostContainer id={match.params.post_id} isDetailPage={true} />
       <CommentsContainer category={match.params.category} id={match.params.post_id} />
     </div>
