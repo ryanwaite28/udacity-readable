@@ -1,24 +1,34 @@
 // Post.js
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { deletePost, editPost, vote } from './../api/postsApi';
+import { getComments } from './../api/commentsApi';
 import DropDownInfo from './shared-components/dropDownInfo';
 import DropDownModify from './shared-components/dropDownModify';
 
-const Post = ({ category, fetchedPost, isDetailPage, post }) => {
-
-  this.styles = {
-    post: {
-      width: '75%',
-      boxShadow: '2px 2px 4px 1px #9a9898'
-    },
-    postTitle: {
-      color: 'dimgray'
+//const Post = ({ category, fetchedPost, isDetailPage, post }) => {
+class Post extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.styles = {
+      post: {
+        width: '75%',
+        boxShadow: '2px 2px 4px 1px #9a9898'
+      },
+      postTitle: {
+        color: 'dimgray'
+      }
     }
-  }
+    //getComments(props.fetchedPost.id);
+}
   
-  if(typeof fetchedPost === 'string') fetchedPost = JSON.parse(fetchedPost);
-  
+  render() {
+    const { isDetailPage } = this.props;
+    let { fetchedPost } = this.props;
+    
+    if(typeof fetchedPost === 'string') fetchedPost = JSON.parse(fetchedPost);
   return (
     <div className='uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small'
          style={this.styles.post}>
@@ -32,7 +42,7 @@ const Post = ({ category, fetchedPost, isDetailPage, post }) => {
       </div>
       <ul className='uk-subnav uk-subnav-divider uk-flex-center'>
         <li>
-          <DropDownInfo component={fetchedPost}/>
+          <DropDownInfo component={fetchedPost} />
         </li>
         <li>
           <DropDownModify component={fetchedPost}
@@ -49,9 +59,17 @@ const Post = ({ category, fetchedPost, isDetailPage, post }) => {
             </a>
           </li>
         }
-      </ul>
+      </ul> 
     </div>
   );
+  }
 }
 
-export default Post;
+//function mapStateToProps({ commentsReducer }) {
+//  return {
+//    comments: commentsReducer['postComments']
+//  };
+//}
+
+//export default connect(mapStateToProps)(Post);
+export default Post

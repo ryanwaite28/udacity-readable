@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { getComments } from './../api/commentsApi';
 import { getPostId, getPosts, getPostsCategory } from './../api/postsApi';
 import { filterComponents } from './../utils/helperMethods';
 import { Link } from 'react-router-dom';

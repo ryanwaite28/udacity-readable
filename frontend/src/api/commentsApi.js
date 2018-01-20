@@ -63,7 +63,7 @@ export const getComments = (id) => {
   const url = baseUrl + '/posts/' + id + '/comments';
   fetch(url, { credentials: 'include', headers } 
        ).then((response) => { return response.text()})
-       .then((json) => retrievedComments(json) )
+       .then((json) => retrievedComments(json, id) )
        .catch((errors) => retrievedCommentsFailure(errors) );
 }
 
