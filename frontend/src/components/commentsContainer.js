@@ -32,7 +32,7 @@ class CommentsContainer extends React.Component {
        Comments
      </h1>
      <hr/>
-       { hasComments && JSON.parse(comments).map((comment, key) => {
+       { hasComments && comments.map((comment, key) => {
            return (
              <Comment comment={comment} key={key}/> 
            );

@@ -71,7 +71,7 @@ function CommentsReducer (state = [], action) {
       console.log(PREFIX + 'Comments have been received.');
       return {
         ...state,
-        comments: action.comments,
+        comments: JSON.parse(action.comments),
         isError: false
       }
     case GET_COMMENTS_FAILURE: 

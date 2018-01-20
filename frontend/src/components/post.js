@@ -21,7 +21,7 @@ class Post extends React.Component {
         color: 'dimgray'
       }
     }
-    //getComments(props.fetchedPost.id);
+   // if(!props.isDetailPage) getComments(props.fetchedPost.id);
 }
   
   render() {
@@ -65,11 +65,11 @@ class Post extends React.Component {
   }
 }
 
-//function mapStateToProps({ commentsReducer }) {
-//  return {
-//    comments: commentsReducer['postComments']
-//  };
-//}
+function mapStateToProps({ commentsReducer }) {
+  return {
+    comments: commentsReducer['comments']
+  };
+}
 
-//export default connect(mapStateToProps)(Post);
-export default Post
+export default connect(mapStateToProps)(Post);
+//export default Post

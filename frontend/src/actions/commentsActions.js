@@ -59,11 +59,10 @@ export function postedCommentVoteFailure (error) {
   });
 }
 
-export function retrievedComments (comments, id) {
+export function retrievedComments (comments) {
   return store.dispatch({
     type: GET_COMMENTS,
-    comments: comments,
-    id: id
+    comments: comments
   });
 }
 
