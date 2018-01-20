@@ -18,12 +18,10 @@ const DropDownInfo = ({ component, styles, comments }) => {
             <span className='uk-text-meta' data-uk-icon='icon: calendar'/>
             <span className='text'>  {new Date(component.timestamp).toUTCString()}</span>
           </li>
-         { comments && comments.id === component.id &&
          <li>
             <span className='uk-text-meta' data-uk-icon='icon: comments'/>
-            <span className='text'>  {comments.value} comments</span>
+            <span className='text'>  {comments} comments</span>
           </li>
-          }
           <li>
             <span className='uk-badge'>  {component.voteScore} votes</span>
           </li>

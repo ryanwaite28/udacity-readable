@@ -7,7 +7,6 @@ import { getComments } from './../api/commentsApi';
 import DropDownInfo from './shared-components/dropDownInfo';
 import DropDownModify from './shared-components/dropDownModify';
 
-//const Post = ({ category, fetchedPost, isDetailPage, post }) => {
 class Post extends React.Component {
   constructor(props) {
     super(props);
@@ -21,14 +20,21 @@ class Post extends React.Component {
         color: 'dimgray'
       }
     }
-   // if(!props.isDetailPage) getComments(props.fetchedPost.id);
+    this.comments = 0;
+    getComments(props.fetchedPost.id);
 }
+  
+  componentWillReceiveProps(commentsReducer) {
+    let commentsParentId = '';
+    if(commentsReducer) commentsParentId = commentsReducer['comments'][0].parentId;
+    if(this.props.fetchedPost.id === commentsParentId) this.comments = commentsReducer['comments'].length;
+  }
   
   render() {
     const { isDetailPage } = this.props;
     let { fetchedPost } = this.props;
-    
     if(typeof fetchedPost === 'string') fetchedPost = JSON.parse(fetchedPost);
+    
   return (
     <div className='uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small'
          style={this.styles.post}>
@@ -42,7 +48,7 @@ class Post extends React.Component {
       </div>
       <ul className='uk-subnav uk-subnav-divider uk-flex-center'>
         <li>
-          <DropDownInfo component={fetchedPost} />
+          <DropDownInfo component={fetchedPost} comments={this.comments} />
         </li>
         <li>
           <DropDownModify component={fetchedPost}
@@ -72,4 +78,3 @@ function mapStateToProps({ commentsReducer }) {
 }
 
 export default connect(mapStateToProps)(Post);
-//export default Post
