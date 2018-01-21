@@ -25,9 +25,13 @@ class Post extends React.Component {
 }
   
   componentWillReceiveProps(commentsReducer) {
-    let commentsParentId = '';
-    if(commentsReducer) commentsParentId = commentsReducer['comments'][0].parentId;
-    if(this.props.fetchedPost.id === commentsParentId) this.comments = commentsReducer['comments'].length;
+    if(commentsReducer) {
+      const commentsObject = commentsReducer['comments'];
+      if(commentsObject && commentsObject[0]) { 
+        if(this.props.fetchedPost.id === commentsObject[0].parentId) 
+          this.comments = commentsReducer['comments'].length;
+      }
+    }
   }
   
   render() {
