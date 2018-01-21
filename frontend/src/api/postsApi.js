@@ -13,13 +13,11 @@ import {
   updatedPostFailure
 } from './../actions/postsActions';
 
-const baseUrl =  `${process.env.REACT_APP_BACKEND}`;
-const uuid = require('uuid/v1');
-
-const headers = { 
-  'Authorization': 'whatever-you-want', 
-  'Content-Type': 'application/json' 
-};
+import {
+  baseUrl,
+  headers,
+  uuid
+} from './../utils/config';
 
 export const createPost = (author, body, category, title) => {
   fetch(`${baseUrl}/posts`, { body: JSON.stringify({
@@ -30,7 +28,6 @@ export const createPost = (author, body, category, title) => {
                 timestamp: Date.now(),
                 title,
               }),
-               credentials: 'include', 
                headers, 
                method: 'POST'
              })
@@ -41,7 +38,7 @@ export const createPost = (author, body, category, title) => {
 
 export const deletePost = (component) => {
   const url = baseUrl + '/posts/' + component.id;
-  fetch(url, { credentials: 'include', headers, method: 'DELETE'} )
+  fetch(url, { headers, method: 'DELETE'} )
        .then((response) => response.text()
        .then((data) => deletedPost(component) )
        .catch((errors) =>  deletedPostFailure(errors) ));
@@ -49,7 +46,6 @@ export const deletePost = (component) => {
 
 export const editPost = (body, id, title) => {
     fetch(`${baseUrl}/posts/${id}`, { body: JSON.stringify({ title, body }),
-                 credentials: 'include', 
                  headers, 
                  method: 'PUT'
                })
@@ -59,14 +55,14 @@ export const editPost = (body, id, title) => {
 }
 
 export const getPostId = (id) => {
-    fetch(`${baseUrl}/posts/${id}`, { credentials: 'include', headers })
+    fetch(`${baseUrl}/posts/${id}`, { headers })
         .then((posts) => posts.json()
         .then((json) => receivedAllPosts(json) ))
         .catch((errors) => receivedAllPostsFailure(errors) )
 }
 
 export const getPosts = () => {
-   fetch(`${baseUrl}/posts/`, { credentials: 'include', headers })
+   fetch(`${baseUrl}/posts/`, { headers })
         .then((posts) => posts.json()
         .then((json) => receivedAllPosts(json) ))
         .catch((errors) => receivedAllPostsFailure(errors) )
@@ -74,7 +70,7 @@ export const getPosts = () => {
 
 export const getPostsCategory = (category) => {
     const categoryTerm = category.substring(category.indexOf('?'));
-    fetch(`${baseUrl}/${categoryTerm}/posts/`, { credentials: 'include', headers })
+    fetch(`${baseUrl}/${categoryTerm}/posts/`, { headers })
         .then((posts) => posts.json()
         .then((json) => receivedAllPosts(json) ))
         .catch((errors) => receivedAllPostsFailure(errors) )
@@ -82,7 +78,6 @@ export const getPostsCategory = (category) => {
                 
 export const vote = (id, vote) => {
     fetch(`${baseUrl}/posts/${id}`, { body: JSON.stringify({ option: vote }),
-                 credentials: 'include', 
                  headers, 
                  method: 'POST'
                })

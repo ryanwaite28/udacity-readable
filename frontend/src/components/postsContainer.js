@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getPostId, getPosts, getPostsCategory } from './../api/postsApi';
-import { filterComponents } from './../utils/helperMethods';
+import { isEmptyObject, filterComponents } from './../utils/helperMethods';
 import { Link } from 'react-router-dom';
 import Post from './post';
 import SortBar from './sortBar';
@@ -32,7 +32,7 @@ class PostContainer extends React.Component {
     if (this.props.category) header = this.props.category;
     return header;
   }
-
+  
   setSortType = (event) => {
     if (event && event.target && event.target.value) {
       this.setState({ sort : event.target.value });
@@ -60,7 +60,8 @@ class PostContainer extends React.Component {
       posts = [].concat(posts);
     }
 
-   const hasPosts = (posts && posts.length > 0);
+   const hasPosts = !isEmptyObject(posts);
+   if(isDetailPage && !hasPosts) window.location.href = '/notFound';
 
    // for detail page
    let postsComponents = [];
@@ -74,24 +75,23 @@ class PostContainer extends React.Component {
 
   return (
     <div className='postItem'>
-      { !isDetailPage && <h1>{this.getHeader()}</h1> }
-        <div> 
-          { hasPosts && posts.length > 1 &&
-            <SortBar components={posts} setSortType={this.setSortType}/> 
-          } 
-        </div>
-        { hasPosts && postsComponents}
-        { !hasPosts && !this.isDetailPage && 
-          <div className='uk-padding-small'>
-           No posts were found.
-           <span>  </span>
-           <Link to={{ pathname: `/add/${this.props.category}` }}>
-             Click here to create a post!
-           </Link>
-         </div>
-        }
+      <div> 
+        { hasPosts && posts.length > 1 &&
+          <SortBar components={posts} setSortType={this.setSortType}/> 
+        } 
       </div>
-    );
+      { hasPosts && postsComponents}
+      { !hasPosts && !this.isDetailPage && 
+        <div className='uk-padding-small'>
+          No posts were found.
+          <span>  </span>
+          <Link to={{ pathname: `/add/${this.props.category}` }}>
+            Click here to create a post!
+          </Link>
+        </div>
+      }
+    </div>
+  )
   }
 }
 

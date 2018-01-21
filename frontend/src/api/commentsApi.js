@@ -13,13 +13,11 @@ import {
   updatedCommentFailure
 } from './../actions/commentsActions';
 
-const baseUrl =  `${process.env.REACT_APP_BACKEND}`;
-const uuid = require('uuid/v1');
-
-const headers = { 
-  'Authorization': 'whatever-you-want', 
-  'Content-Type': 'application/json' 
-};
+import {
+  baseUrl,
+  headers,
+  uuid
+} from './../utils/config';
 
 export const createComment = (author, body, id, title) => {
   const url = baseUrl + '/comments/';
@@ -30,7 +28,6 @@ export const createComment = (author, body, id, title) => {
                 timestamp: Date.now(),
                 parentId: id,
               }),
-               credentials: 'include', 
                headers, 
                method: 'POST'
              } 
@@ -41,7 +38,7 @@ export const createComment = (author, body, id, title) => {
 
 export const deleteComment = (component) => {
   const url = baseUrl + '/comments/' + component.id;
-  fetch(url, { credentials: 'include', headers, method: 'DELETE'} )
+  fetch(url, { headers, method: 'DELETE'} )
        .then((response) => response.text()
        .then((data) => deletedComment(data) )
        .catch((errors) =>  deletedCommentFailure(errors) ));
@@ -50,7 +47,6 @@ export const deleteComment = (component) => {
 export const editComment = (body, id, title) => {
   const url = baseUrl + '/comments/' + id;
   fetch(url, { body: JSON.stringify({ title, body }),
-               credentials: 'include', 
                headers, 
                method: 'PUT'
              } 
@@ -61,7 +57,7 @@ export const editComment = (body, id, title) => {
 
 export const getComments = (id) => {
   const url = baseUrl + '/posts/' + id + '/comments';
-  fetch(url, { credentials: 'include', headers } 
+  fetch(url, { headers } 
        ).then((response) => { return response.text()})
        .then((json) => retrievedComments(json) )
        .catch((errors) => retrievedCommentsFailure(errors) );
@@ -69,7 +65,6 @@ export const getComments = (id) => {
 
 export const vote = (id, vote) => {
   fetch(`${baseUrl}/comments/${id}`, { body: JSON.stringify({ option: vote }),
-               credentials: 'include', 
                headers, 
                method: 'POST'
              } 

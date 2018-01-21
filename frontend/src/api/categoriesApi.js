@@ -5,11 +5,10 @@ import {
   retrievedCategoriesFailure
 } from './../actions/categoriesActions';
 
-const baseUrl =  `${process.env.REACT_APP_BACKEND}`;
-
-const headers = { 
-  'Authorization': 'whatever-you-want'
-};
+import {
+  baseUrl,
+  headers
+} from './../utils/config';
 
 export const getCategories = () => {
    fetch(`${baseUrl}/categories`, { credentials: 'include', headers } 
