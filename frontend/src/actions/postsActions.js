@@ -2,20 +2,18 @@
 
 import { store } from '../store';
 
-export const CREATED_POST = 'CREATED_POST';
-export const CREATED_POST_FAILURE = 'CREATED_POST_FAILURE';
-
-export const DELETED_POST = 'DELETED_POST';
-export const DELETED_POST_FAILURE = 'DELETED_POST_FAILURE';
-
-export const GET_ALL_POSTS = 'GET_ALL_POSTS';
-export const GET_ALL_POSTS_FAILURE = 'GET_ALL_POSTS_FAILURE';
-
-export const POST_VOTE = 'POST_VOTE';
-export const POST_VOTE_FAILURE = 'POST_VOTE_FAILURE';
-
-export const UPDATED_POST = 'UPDATED_POST';
-export const UPDATED_POST_FAILURE = 'UPDATED_POST_FAILURE';
+import { 
+  CREATED_POST,
+  CREATED_POST_FAILURE,
+  DELETED_POST,
+  DELETED_POST_FAILURE,
+  GET_ALL_POSTS,
+  GET_ALL_POSTS_FAILURE,
+  POST_VOTE,
+  POST_VOTE_FAILURE,
+  UPDATED_POST,
+  UPDATED_POST_FAILURE
+} from './../utils/constants';
 
 export function createdPost (post, category) {
   return store.dispatch({

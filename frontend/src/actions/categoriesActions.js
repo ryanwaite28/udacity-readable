@@ -2,8 +2,10 @@
 
 import { store } from '../store';
 
-export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
-export const GET_ALL_CATEGORIES_FAILURE = 'GET_ALL_CATEGORIES_FAILURE';
+import { 
+  GET_ALL_CATEGORIES,
+  GET_ALL_CATEGORIES_FAILURE
+} from './../utils/constants';
 
 export function retrievedCategories(categories) {
   return store.dispatch({
