@@ -12,7 +12,7 @@ import {
   GET_COMMENTS_FAILURE,
   UPDATED_COMMENT,
   UPDATED_COMMENT_FAILURE
-} from './../actions/commentsActions'
+} from './../utils/constants'
 
 function CommentsReducer (state = [], action) {
   const PREFIX = 'Reducer status: ';

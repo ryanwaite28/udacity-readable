@@ -12,7 +12,7 @@ import {
   POST_VOTE_FAILURE,
   UPDATED_POST,
   UPDATED_POST_FAILURE
-} from './../actions/postsActions';
+} from './../utils/constants';
 
 
 export default function postsReducer (state = {}, action) {

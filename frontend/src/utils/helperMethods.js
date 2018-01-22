@@ -51,7 +51,7 @@ export function isEmptyObject(componentToCheck) {
   let isEmpty = true;
   if(componentToCheck) {
     for(let i = 0; i < componentToCheck.length; i++) {
-      if(componentToCheck[i] && componentToCheck[i].length > 0) 
+      if(componentToCheck[i] && componentToCheck[i].id) 
         isEmpty = false;
     }
   }

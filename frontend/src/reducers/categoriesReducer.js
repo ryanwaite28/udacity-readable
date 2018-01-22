@@ -3,7 +3,7 @@
 import { 
   GET_ALL_CATEGORIES, 
   GET_ALL_CATEGORIES_FAILURE 
-} from './../actions/categoriesActions';
+} from './../utils/constants';
 
 export default function categoriesReducer (state = {}, action) {
   const PREFIX = 'Reducer status: ';

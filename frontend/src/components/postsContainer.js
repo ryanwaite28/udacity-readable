@@ -53,15 +53,16 @@ class PostContainer extends React.Component {
 
   render() {
     let { isDetailPage, posts } = this.props;
-    
+
     if (posts) {
       posts  = filterComponents(posts);
       if (!isDetailPage) posts = this.sortPosts(posts);
       posts = [].concat(posts);
     }
-
-   const hasPosts = !isEmptyObject(posts);
-   if(isDetailPage && !hasPosts) window.location.href = '/notFound';
+    if(isDetailPage && posts && Object.keys(posts[0]) < 1) {
+      window.location.href = '/notFound';
+    }
+     const hasPosts = (posts && posts.length > 0);
 
    // for detail page
    let postsComponents = [];
@@ -81,7 +82,7 @@ class PostContainer extends React.Component {
         } 
       </div>
       { hasPosts && postsComponents}
-      { !hasPosts && !this.isDetailPage && 
+      { !hasPosts &&
         <div className='uk-padding-small'>
           No posts were found.
           <span>  </span>
