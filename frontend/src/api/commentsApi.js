@@ -16,14 +16,12 @@ import {
 import {
   baseUrl,
   headers,
+  getCred,
   uuid
 } from './../utils/config';
 
-let credential = 'true';
-if(baseUrl === `${process.env.REACT_APP_BACKEND}`) credential = 'include';
-
 export const createComment = (author, body, id, title) => {
-  const url = baseUrl + '/comments/';
+  const url = `${baseUrl}/comments`;
   fetch(url, { body: JSON.stringify({
                 author,
                 body,
@@ -31,7 +29,7 @@ export const createComment = (author, body, id, title) => {
                 timestamp: Date.now(),
                 parentId: id,
               }),
-               credentials: credential,
+               credentials: getCred(),
                headers, 
                method: 'POST'
              } 
@@ -41,17 +39,17 @@ export const createComment = (author, body, id, title) => {
 }
 
 export const deleteComment = (component) => {
-  const url = baseUrl + '/comments/' + component.id;
-  fetch(url, { credentials: credential, headers, method: 'DELETE'} )
+  const url = `${baseUrl}/comments/${component.id}`;
+  fetch(url, { credentials: getCred(), headers, method: 'DELETE'} )
        .then((response) => response.text()
        .then((data) => deletedComment(data) )
        .catch((errors) =>  deletedCommentFailure(errors) ));
 }
 
 export const editComment = (body, id, title) => {
-  const url = baseUrl + '/comments/' + id;
+  const url = `${baseUrl}/comments/${id}`;
   fetch(url, { body: JSON.stringify({ title, body }),
-               credentials: credential,
+               credentials: getCred(),
                headers, 
                method: 'PUT'
              } 
@@ -61,8 +59,8 @@ export const editComment = (body, id, title) => {
 }
 
 export const getComments = (id) => {
-  const url = baseUrl + '/posts/' + id + '/comments';
-  fetch(url, { credentials: credential, headers } 
+  const url = `${baseUrl}/posts/${id}/comments}`;
+  fetch(url, { credentials: getCred(), headers } 
        ).then((response) => { return response.text()})
        .then((json) => retrievedComments(json) )
        .catch((errors) => retrievedCommentsFailure(errors) );
@@ -70,7 +68,7 @@ export const getComments = (id) => {
 
 export const vote = (id, vote) => {
   fetch(`${baseUrl}/comments/${id}`, { body: JSON.stringify({ option: vote }),
-               credentials: credential,                        
+               credentials: getCred(),                        
                headers, 
                method: 'POST'
              } 

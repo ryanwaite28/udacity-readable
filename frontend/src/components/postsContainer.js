@@ -16,15 +16,18 @@ class PostContainer extends React.Component {
       sort: 'Date'
     }
      
-    this.isDetailPage = props.isDetailPage;
+    this.isDetailPage = false;
     
     if (props.category) {
       getPostsCategory(props.category);
     } else if (props.id) {
+      this.isDetailPage = true;
       getPostId(props.id);
     } else {
       getPosts();
     }
+
+    console.log(props)
   }
  
   getHeader = () => {

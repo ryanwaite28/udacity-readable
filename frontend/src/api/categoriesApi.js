@@ -7,15 +7,13 @@ import {
 
 import {
   baseUrl,
-  headers
+  headers,
+  getCred,
 } from './../utils/config';
 
-let credential = 'true';
-if(baseUrl === `${process.env.REACT_APP_BACKEND}`) credential = 'include';
-
 export const getCategories = () => {
-   fetch(`${baseUrl}/categories`, { credentials: credential, headers } 
-         ).then((response) => { return response.text()})
+   fetch(`${baseUrl}/categories`, { credentials: getCred(), headers } 
+         ).then((response) => { console.log('in here'); return response.text()})
         .then((data) => retrievedCategories(data) )
         .catch((errors) => retrievedCategoriesFailure(errors) )
 }
