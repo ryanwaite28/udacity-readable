@@ -5,7 +5,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Sortable - UIkit tests</title>
-        <script src="../dist/js/uikit.js"></script>
         <script src="js/test.js"></script>
 
         <style>
@@ -23,10 +22,6 @@
 
                 util.on(document.body, 'start', function (e, sortable, el) {
                     console.log('start', sortable, el);
-                });
-
-                util.on(document.body, 'move', function(e, sortable) {
-                    console.log('move', sortable);
                 });
 
                 util.on(document.body, 'moved', function(e, sortable, el) {
@@ -222,7 +217,7 @@
                 </div></li>
             </ul>
 
-            <h2>Javascript Options</h2>
+            <h2>JavaScript Options</h2>
 
             <div class="uk-overflow-auto">
                 <table class="uk-table uk-table-striped">

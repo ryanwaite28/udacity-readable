@@ -17,24 +17,27 @@ const Comment = ({ comment }) => {
     },
     text: {
       color: 'rgb(128, 141, 230)',
-      paddingLeft: 5, 
+      paddingLeft: 5,
       textTransform: 'uppercase'
     }
   }
 
    return (
-    <div className='uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small' 
+    <div className='uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small'
          style={this.styles.comment}>
       <div className='uk-content'>
         <p>{comment.body}</p>
+      </div>
+      <div className='uk-content'>
+        <p>Score: {comment.voteScore}</p>
       </div>
       <ul className='uk-subnav uk-subnav-divider uk-flex-center'>
         <li>
           <DropDownInfo component={comment}/>
         </li>
         <li>
-          <DropDownModify component={comment} 
-                          deleteComponent={deleteComment} 
+          <DropDownModify component={comment}
+                          deleteComponent={deleteComment}
                           editComponent={editComment}
                           vote={vote}/>
         </li>

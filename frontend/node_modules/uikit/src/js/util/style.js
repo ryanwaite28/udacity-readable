@@ -1,4 +1,8 @@
-import { addClass, append, doc, docEl, each, hyphenate, isArray, isNumeric, isObject, isString, isUndefined, toNode, toNodes } from './index';
+import { append } from './dom';
+import { addClass } from './class';
+import { doc, docEl } from './env';
+import { toNode, toNodes } from './selector';
+import { each, hyphenate, isArray, isNumeric, isObject, isString, isUndefined } from './lang';
 
 var cssNumber = {
     'animation-iteration-count': true,
@@ -37,7 +41,7 @@ export function css(element, property, value) {
             var styles = getStyles(element);
 
             return property.reduce((props, property) => {
-                props[property] = propName(styles[property]);
+                props[property] = styles[propName(property)];
                 return props;
             }, {});
 
@@ -66,7 +70,7 @@ export function getCssVar(name) {
 
     if (!(name in vars)) {
 
-        /* usage in css:  .var-name:before { content:"xyz" } */
+        /* usage in css: .var-name:before { content:"xyz" } */
 
         var element = append(docEl, doc.createElement('div'));
 
@@ -89,7 +93,7 @@ export function getCssVar(name) {
 
 var cssProps = {};
 
-function propName(name) {
+export function propName(name) {
 
     var ret = cssProps[name];
     if (!ret) {
@@ -99,7 +103,7 @@ function propName(name) {
 }
 
 var cssPrefixes = ['webkit', 'moz', 'ms'],
-    style = doc.createElement('div').style;
+    style = doc.createElement('_').style;
 
 function vendorPropName(name) {
 
@@ -112,7 +116,7 @@ function vendorPropName(name) {
     var i = cssPrefixes.length, prefixedName;
 
     while (i--) {
-        prefixedName = `-${cssPrefixes[i]}${name}`;
+        prefixedName = `-${cssPrefixes[i]}-${name}`;
         if (prefixedName in style) {
             return prefixedName;
         }

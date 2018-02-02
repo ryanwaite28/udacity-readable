@@ -11,13 +11,13 @@ import SortBar from './sortBar';
 class PostContainer extends React.Component {
   constructor(props) {
     super(props)
-    
+
     this.state = {
       sort: 'Date'
     }
-     
+
     this.isDetailPage = false;
-    
+
     if (props.category) {
       getPostsCategory(props.category);
     } else if (props.id) {
@@ -29,13 +29,13 @@ class PostContainer extends React.Component {
 
     console.log(props)
   }
- 
+
   getHeader = () => {
     let header = 'All Categories';
     if (this.props.category) header = this.props.category;
     return header;
   }
-  
+
   setSortType = (event) => {
     if (event && event.target && event.target.value) {
       this.setState({ sort : event.target.value });
@@ -45,7 +45,7 @@ class PostContainer extends React.Component {
   sortPosts = (posts) => {
     const sortType = this.state.sort;
     if (sortType) {
-       if ('Date' === sortType) { 
+       if ('Date' === sortType) {
         posts = [].concat(posts).sort((a, b) => { return b.timestamp - a.timestamp });
       } else if ('Votes' === sortType) {
         posts = [].concat(posts).sort((a, b) => { return b.voteScore - a.voteScore });
@@ -55,6 +55,7 @@ class PostContainer extends React.Component {
   }
 
   render() {
+    console.log(this);
     let { isDetailPage, posts } = this.props;
 
     if (posts) {
@@ -79,10 +80,10 @@ class PostContainer extends React.Component {
 
   return (
     <div className='postItem'>
-      <div> 
+      <div>
         { hasPosts && posts.length > 1 &&
-          <SortBar components={posts} setSortType={this.setSortType}/> 
-        } 
+          <SortBar components={posts} setSortType={this.setSortType}/>
+        }
       </div>
       { hasPosts && postsComponents}
       { !hasPosts &&
@@ -99,9 +100,10 @@ class PostContainer extends React.Component {
   }
 }
 
-function mapStateToProps({ postsReducer }) {
+function mapStateToProps(state) {
+  console.log('state', state);
   return {
-    posts:  postsReducer['posts']
+    posts:  state.postsReducer['posts']
   };
 }
 

@@ -1,6 +1,6 @@
-export const baseUrl = window.location.origin;
-export const headers = { 
-    'Authorization': 'auth', 
+export const baseUrl = 'http://localhost:3001';
+export const headers = {
+    'Authorization': 'auth',
     'Content-Type': 'application/json'
 };
 export const uuid = require('uuid/v1');

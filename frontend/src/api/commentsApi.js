@@ -1,15 +1,15 @@
 // commentsApi.js
 
-import { 
+import {
   createdComment,
   createdCommentFailure,
   deletedComment,
   deletedCommentFailure,
-  postedCommentVote, 
-  postedCommentVoteFailure, 
+  postedCommentVote,
+  postedCommentVoteFailure,
   retrievedComments,
   retrievedCommentsFailure,
-  updatedComment, 
+  updatedComment,
   updatedCommentFailure
 } from './../actions/commentsActions';
 
@@ -30,9 +30,9 @@ export const createComment = (author, body, id, title) => {
                 parentId: id,
               }),
                credentials: getCred(),
-               headers, 
+               headers,
                method: 'POST'
-             } 
+             }
        ).then((response) => response.json()
        .then((json) => createdComment(json) )
        .catch((errors) =>  createdCommentFailure(errors) ));
@@ -50,17 +50,17 @@ export const editComment = (body, id, title) => {
   const url = `${baseUrl}/comments/${id}`;
   fetch(url, { body: JSON.stringify({ title, body }),
                credentials: getCred(),
-               headers, 
+               headers,
                method: 'PUT'
-             } 
+             }
        ).then((response) => response.json()
        .then((json) => updatedComment(json) )
        .catch((errors) =>  updatedCommentFailure(errors) ));
 }
 
 export const getComments = (id) => {
-  const url = `${baseUrl}/posts/${id}/comments}`;
-  fetch(url, { credentials: getCred(), headers } 
+  const url = `${baseUrl}/posts/${id}/comments`;
+  fetch(url, { credentials: getCred(), headers }
        ).then((response) => { return response.text()})
        .then((json) => retrievedComments(json) )
        .catch((errors) => retrievedCommentsFailure(errors) );
@@ -68,10 +68,10 @@ export const getComments = (id) => {
 
 export const vote = (id, vote) => {
   fetch(`${baseUrl}/comments/${id}`, { body: JSON.stringify({ option: vote }),
-               credentials: getCred(),                        
-               headers, 
+               credentials: getCred(),
+               headers,
                method: 'POST'
-             } 
+             }
        ).then((response) => response.json()
        .then((json) => postedCommentVote(json) )
        .catch((errors) =>  postedCommentVoteFailure(errors) ));

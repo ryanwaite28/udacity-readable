@@ -10,7 +10,7 @@ import DropDownModify from './shared-components/dropDownModify';
 class Post extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.styles = {
       post: {
         width: '75%',
@@ -23,22 +23,22 @@ class Post extends React.Component {
     this.comments = 0;
     getComments(props.fetchedPost.id);
 }
-  
+
   componentWillReceiveProps(commentsReducer) {
     if(commentsReducer) {
       const commentsObject = commentsReducer['comments'];
-      if(commentsObject && commentsObject[0]) { 
-        if(this.props.fetchedPost.id === commentsObject[0].parentId) 
+      if(commentsObject && commentsObject[0]) {
+        if(this.props.fetchedPost.id === commentsObject[0].parentId)
           this.comments = commentsReducer['comments'].length;
       }
     }
   }
-  
+
   render() {
     const { isDetailPage } = this.props;
     let { fetchedPost } = this.props;
     if(typeof fetchedPost === 'string') fetchedPost = JSON.parse(fetchedPost);
-    
+
     return (
       <div className='uk-card uk-card-body-small uk-background-muted uk-panel uk-align-center uk-padding-small'
         style={this.styles.post}>
@@ -50,26 +50,29 @@ class Post extends React.Component {
         <div className='uk-content'>
           <p>{fetchedPost.body}</p>
         </div>
+        <div className='uk-content'>
+          <p>Score: {fetchedPost.voteScore}</p>
+        </div>
         <ul className='uk-subnav uk-subnav-divider uk-flex-center'>
           <li>
             <DropDownInfo component={fetchedPost} comments={this.comments} />
           </li>
           <li>
             <DropDownModify component={fetchedPost}
-              deleteComponent={deletePost} 
+              deleteComponent={deletePost}
               editComponent={editPost}
               isDetailPage={isDetailPage}
               vote={vote}/>
           </li>
-          { !isDetailPage && 
+          { !isDetailPage &&
             <li>
-              <a className='uk-text-meta' 
-                href={`${fetchedPost.category}/${fetchedPost.id}`} 
+              <a className='uk-text-meta'
+                href={`${fetchedPost.category}/${fetchedPost.id}`}
                 data-uk-icon='icon: more'>
               </a>
             </li>
           }
-        </ul> 
+        </ul>
       </div>
     );
   }
