@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getPostId, getPosts, getPostsCategory } from './../api/postsApi';
-import { isEmptyObject, filterComponents } from './../utils/helperMethods';
+import { filterComponents } from './../utils/helperMethods';
 import { Link } from 'react-router-dom';
 import Post from './post';
 import SortBar from './sortBar';
